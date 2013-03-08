@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+var commander = require('commander');
+var zip = require('../lib/zip');
+
+commander.usage('[options]');
+
+commander
+  .option('-I, --input <dir>', 'input directory: [dist]')
+  .option('-O, --output <zipfile>', 'output zipfile')
+  .option('--format <format>', 'directory format: [{{family}}/{{name}}/{{version}}]')
+
+commander.parse(process.argv);
+
+// run install
+console.log();
+
+var options = {};
+options.src = commander.input;
+options.dest = commander.output;
+options.basedir = commander.format;
+zip(options, function(err, bytesWrite, dest) {
+    console.log('  write ' + bytesWrite + ' bytes into ' + dest);
+    console.log();
+});

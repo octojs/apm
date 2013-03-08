@@ -1,0 +1,39 @@
+{
+  "name": "spm-alipay-suite",
+  "description": "A suite for alipay",
+  "version": "0.1.0a1",
+  "homepage": "https://github.com/spmjs/spm-alipay-suite",
+  "author": {
+    "name": "Hsiaoming Yang",
+    "email": "lepture@me.com",
+    "url": "http://lepture.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/spmjs/spm-alipay-suite.git"
+  },
+  "bugs": {
+    "url": "https://github.com/spmjs/spm-alipay-suite/issues"
+  },
+  "engines": {
+    "node": ">= 0.8.6"
+  },
+  "dependencies": {
+    "async": "~0.2.6",
+    "cmd-util": "~0.2.0",
+    "archiver": "~0.4.0",
+
+    "grunt-check-online": "~0.1.0",
+    "grunt-scp": "~0.1.0"
+  },
+  "scripts": {
+    "postinstall": "scripts/post-install.js"
+  },
+  "bin": {
+    "spm-zip": "bin/spm-zip",
+    "spm-deploy": "bin/spm-deploy"
+  },
+  "keywords": [
+    "spmplugin", "gruntcollection"
+  ]
+}

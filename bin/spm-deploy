@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+var commander = require('commander');
+var deploy = require('../lib/deploy');
+
+commander.usage('[options]');
+
+commander
+  .option('--host <server>', 'reset the server host')
+  .option('--target <target>', 'a variable to be used')
+  .option('-v, --verbose', 'show more logs')
+
+commander.parse(process.argv);
+
+// run install
+console.log();
+
+var options = {};
+options.target = commander.target;
+options.host = commander.host;
+options.verbose = commander.verbose;
+deploy(options);

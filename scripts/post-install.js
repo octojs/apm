@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+try {
+  var spm = require('spm');
+  spm.plugin.install({
+    name: 'zip',
+    binary: 'spm-zip',
+    description: 'create a zip ball'
+  });
+  spm.plugin.install({
+    name: 'deploy',
+    binary: 'spm-deploy',
+    description: 'scp files to server'
+  });
+} catch (e) {
+  console.log();
+  console.log('  you need install spm to register the program');
+  console.log();
+  console.log('    $ npm install spm@~2.0.0 -g');
+  console.log();
+  console.log("  if you have installed spm, it maybe you haven't set a NODE_PATH environment variable");
+}
