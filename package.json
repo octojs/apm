@@ -22,6 +22,7 @@
     "async": "~0.2.6",
     "cmd-util": "~0.2.0",
     "archiver": "~0.4.0",
+    "win-spawn": "~1.1.0",
 
     "grunt-check-online": "~0.1.0",
     "grunt-scp": "~0.1.0"

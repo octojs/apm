@@ -1,4 +1,6 @@
 #!/usr/bin/env node
 
-require('spm').plugin.uninstall('zip');
-require('spm').plugin.uninstall('deploy');
+try {
+  require('spm').plugin.uninstall('zip');
+  require('spm').plugin.uninstall('deploy');
+} catch(e) {}
