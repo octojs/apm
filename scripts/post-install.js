@@ -14,6 +14,10 @@ try {
     binary: 'spm-deploy',
     description: 'scp files to server'
   });
+
+  var path = require('path');
+  var gruntfile = path.join(__dirname, '..', 'Gruntfile.js')
+  spm.sdk.spmrc.set('user.gruntfile', path.normalize(gruntfile));
 } catch (e) {
   console.log('  you need install spm to register the program');
   console.log();
