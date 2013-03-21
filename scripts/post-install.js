@@ -16,12 +16,15 @@ try {
   });
 
   var path = require('path');
-  var gruntfile = path.join(__dirname, '..', 'Gruntfile.js')
-  spm.sdk.spmrc.set('user.gruntfile', path.normalize(gruntfile));
+  var gruntfile = path.join(__dirname, '..', 'Gruntfile.js');
+  var spmrc = spm.sdk.spmrc;
+  if (!spmrc.get('user.gruntfile')) {
+    spmrc.set('user.gruntfile', path.normalize(gruntfile));
+  }
 } catch (e) {
   console.log('  you need install spm to register the program');
   console.log();
-  console.log('    \x1b[31m$ npm install spm@~2.0.0 -g\x1b[39m');
+  console.log('    \x1b[31m$ npm install spm@~2.0.0 -g\x1b[0m');
   console.log();
   console.log("  if you have installed spm, it maybe you haven't set a NODE_PATH environment variable");
   console.log();
