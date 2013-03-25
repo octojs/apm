@@ -1,5 +1,32 @@
 module.exports = function(grunt) {
   grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    target: grunt.option('target') || 'dev',
+
+    'check-online': {
+      alipay: {
+        options: {
+          // status code should be 404
+          statusCode: 404,
+          server: 'https://a.alipayobjects.com'
+        }
+      }
+    },
+
+    scp: {
+      options: {
+        username: 'admin',
+        password: 'alipaydev',
+        host: 'assets.<%= target %>.alipay.net'
+      },
+      assets: {
+        files: [{
+          cwd: 'dist',
+          src: '**/*',
+          dest: '/home/admin/wwwroot/assets/<%= pkg.family %>/<%= pkg.name %>/<%= pkg.version %>'
+        }]
+      }
+    }
   });
 
   if (grunt.loadGlobalTasks) {
