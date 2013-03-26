@@ -9,7 +9,12 @@ module.exports = function(grunt) {
           // status code should be 404
           statusCode: 404,
           server: 'https://a.alipayobjects.com'
-        }
+        },
+        files: [{
+          cwd: 'dist',
+          src: '**/*',
+          dest: '<%= pkg.family %>/<%= pkg.name %>/<%= pkg.version %>'
+        }]
       }
     },
 
