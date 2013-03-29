@@ -26,7 +26,7 @@
     "commander": "~1.1.1",
 
     "grunt-check-online": "~0.1.0a2",
-    "grunt-scp": "~0.1.0"
+    "grunt-scp": "~0.1.1"
   },
   "scripts": {
     "postinstall": "scripts/post-install.js",
