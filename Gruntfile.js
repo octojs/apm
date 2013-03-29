@@ -21,7 +21,7 @@ module.exports = function(grunt) {
     scp: {
       options: {
         username: 'admin',
-        password: 'alipaydev',
+        password: '<%= password %>',
         host: 'assets.<%= target %>.alipay.net'
       },
       assets: {
