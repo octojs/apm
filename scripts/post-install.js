@@ -31,12 +31,14 @@ try {
   console.log();
 }
 
-if (!moduleExist('spm-init')) {
-  spawn('npm', ['install', 'spm-init', '-g'], {stdio: 'inherit'});
-}
+installModule('spm-init');
+installModule('spm-status');
 
-function moduleExist(module) {
-  if (!process.env.NODE_PATH) return false;
+
+function installModule(module) {
+  if (!process.env.NODE_PATH) return;
   var p = path.join(process.env.NODE_PATH, module);
-  return fs.existsSync(p);
+  if (!fs.existsSync(p)) {
+    spawn('npm', ['install', module, '-g'], {stdio: 'inherit'});
+  }
 }
