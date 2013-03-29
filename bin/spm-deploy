@@ -28,7 +28,7 @@ console.log();
 var options = {};
 options.target = commander.target;
 options.host = commander.host;
-options.password = commander.password || 'alipaydev';
+options.password = commander.password;
 options.verbose = commander.verbose;
 options.query = commander.args[0];
 deploy(options);

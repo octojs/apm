@@ -2,6 +2,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     target: grunt.option('target') || 'dev',
+    password: grunt.option('password') || 'alipaydev',
 
     'check-online': {
       alipay: {
