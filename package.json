@@ -23,6 +23,7 @@
     "cmd-util": "~0.2.0",
     "archiver": "~0.4.0",
     "win-spawn": "~1.1.0",
+    "commander": "~1.1.1",
 
     "grunt-check-online": "~0.1.0",
     "grunt-scp": "~0.1.0"
