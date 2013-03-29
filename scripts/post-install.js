@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 var spawn = require('win-spawn');
+var fs = require('fs');
+var path = require('path');
 
 try {
   var spm = require('spm');
@@ -15,7 +17,6 @@ try {
     description: 'scp files to server'
   });
 
-  var path = require('path');
   var gruntfile = path.join(__dirname, '..', 'Gruntfile.js');
   var spmrc = spm.sdk.spmrc;
   if (!spmrc.get('user.gruntfile')) {
@@ -30,4 +31,12 @@ try {
   console.log();
 }
 
-spawn('npm', ['install', 'spm-init', '-g'], {stdio: 'inherit'});
+if (!moduleExist('spm-init')) {
+  spawn('npm', ['install', 'spm-init', '-g'], {stdio: 'inherit'});
+}
+
+function moduleExist(module) {
+  if (!process.env.NODE_PATH) return false;
+  var p = path.join(process.env.NODE_PATH, module);
+  return fs.existsSync(p);
+}
