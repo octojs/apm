@@ -8,7 +8,7 @@ commander.usage('[options]');
 commander
   .option('--host <server>', 'reset the server host')
   .option('--target <target>', 'a variable to be used')
-  .option('--password <password>', 'a password to server')
+  .option('--password <pass>', 'a password to server')
   .option('-v, --verbose', 'show more logs');
 
 commander.on('--help', function() {
@@ -28,7 +28,7 @@ console.log();
 var options = {};
 options.target = commander.target;
 options.host = commander.host;
-options.password = commander.password;
+options.password = commander.pass;
 options.verbose = commander.verbose;
 options.query = commander.args[0];
 deploy(options);
