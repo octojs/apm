@@ -11,12 +11,6 @@ try {
     binary: 'spm-zip',
     description: 'create a zip ball'
   });
-  spm.plugin.install({
-    name: 'deploy',
-    binary: 'spm-deploy',
-    description: 'scp files to server'
-  });
-
   var gruntfile = path.join(__dirname, '..', 'Gruntfile.js');
   var spmrc = spm.sdk.spmrc;
   if (!spmrc.get('user.gruntfile')) {
