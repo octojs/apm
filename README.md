@@ -7,13 +7,13 @@
 先安装 spm2
 
 ```
-$ npm install spm@ninja -g
+$ npm install spm -g
 ```
 
 安装支付宝前端工具
 
 ```
-$ npm install spm-alipay-suite -g
+$ npm install spm-alipay-suite@ninja -g
 ```
 
 ## Package.json
