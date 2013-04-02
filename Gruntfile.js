@@ -61,6 +61,7 @@ module.exports = function(grunt) {
 
   if (grunt.loadGlobalTasks) {
     grunt.loadGlobalTasks('spm-alipay-suite');
+    grunt.loadGlobalTasks('spm-deploy');
 
     var path = require('path');
     var rootdir = path.dirname(require.resolve('spm/node_modules/grunt-spm-build'));
@@ -73,7 +74,6 @@ module.exports = function(grunt) {
       }
     });
   } else {
-  grunt.loadNpmTasks('grunt-scp');
     grunt.loadNpmTasks('grunt-check-online');
     grunt.loadNpmTasks('grunt-contrib-stylus');
   }
