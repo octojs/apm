@@ -33,6 +33,7 @@ try {
 
 installModule('spm-init');
 installModule('spm-status');
+installModule('spm-deploy');
 
 
 function installModule(module) {
