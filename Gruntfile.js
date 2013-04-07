@@ -43,7 +43,10 @@ module.exports = function(grunt) {
           expand: true,
           ext: '.css',
           dest: '.build/stylus/'
-        }]
+        }],
+        options: {
+          compress: false
+        }
       }
     },
 
