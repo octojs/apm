@@ -24,12 +24,18 @@ module.exports = function(grunt) {
       options: {
         username: 'admin',
         password: '<%= password %>',
-        host: 'assets.<%= target %>.alipay.net'
+        host: 'assets.<%= target %>.alipay.net',
+        log: function(o) {
+          var dest = o.destination.replace('/home/admin/wwwroot/assets', '');
+          var base = 'http://assets.' + (grunt.option('target') || 'dev') + '.alipay.net';
+          grunt.log.writeln('online ' + base + dest);
+        }
       },
       assets: {
         files: [{
           cwd: 'dist',
           src: '**/*',
+          filter: 'isFile',
           dest: '/home/admin/wwwroot/assets/<%= pkg.family %>/<%= pkg.name %>/<%= pkg.version %>'
         }]
       }
