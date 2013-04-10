@@ -2,8 +2,6 @@ module.exports = function(grunt) {
   var pkg = grunt.file.readJSON('package.json');
   grunt.initConfig({
     pkg: pkg,
-    target: grunt.option('target') || 'dev',
-    password: grunt.option('password') || 'alipaydev',
 
     'check-online': {
       alipay: {
@@ -15,28 +13,8 @@ module.exports = function(grunt) {
         files: [{
           cwd: 'dist',
           src: '**/*',
-          dest: '<%= pkg.family %>/<%= pkg.name %>/<%= pkg.version %>'
-        }]
-      }
-    },
-
-    scp: {
-      options: {
-        username: 'admin',
-        password: '<%= password %>',
-        host: 'assets.<%= target %>.alipay.net',
-        log: function(o) {
-          var dest = o.destination.replace('/home/admin/wwwroot/assets', '');
-          var base = 'http://assets.' + (grunt.option('target') || 'dev') + '.alipay.net';
-          grunt.log.writeln('online ' + base + dest);
-        }
-      },
-      assets: {
-        files: [{
-          cwd: 'dist',
-          src: '**/*',
           filter: 'isFile',
-          dest: '/home/admin/wwwroot/assets/<%= pkg.family %>/<%= pkg.name %>/<%= pkg.version %>'
+          dest: '<%= pkg.family %>/<%= pkg.name %>/<%= pkg.version %>'
         }]
       }
     },
@@ -70,8 +48,6 @@ module.exports = function(grunt) {
 
   if (grunt.loadGlobalTasks) {
     grunt.loadGlobalTasks('spm-alipay-suite');
-    grunt.loadGlobalTasks('spm-deploy');
-
     var path = require('path');
     var rootdir = path.dirname(require.resolve('spm/node_modules/grunt-spm-build'));
     require(rootdir).initConfig(grunt, {pkg: pkg}, true);
@@ -97,19 +73,20 @@ module.exports = function(grunt) {
     // build css
     'transport:spm',  // src/* -> .build/src/*
     'concat:css',   // .build/src/*.css -> .build/dist/*.css
-    'cssmin:css',   // .build/dist/*.css -> dist/*.css
 
     // build js (must be invoke after css build)
     'transport:css',  // .build/dist/*.css -> .build/src/*.css.js
     'concat:js',  // .build/src/* -> .build/dist/*.js
+
+    // to dist
+    'copy:spm',
+    'cssmin:css',   // .build/dist/*.css -> dist/*.css
     'uglify:js',  // .build/dist/*.js -> dist/*.js
 
     // resource
-    'copy:spm', //
     'clean:spm', // rm .build
     'newline',
 
     'check-online'
   ]);
-  grunt.registerTask('deploy', ['scp']);
 };
