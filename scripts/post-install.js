@@ -12,7 +12,7 @@ try {
     description: 'create a zip ball'
   });
   var gruntfile = path.join(__dirname, '..', 'Gruntfile.js');
-  var spmrc = spm.sdk.spmrc;
+  var spmrc = require('spmrc');
   if (!spmrc.get('user.gruntfile')) {
     spmrc.set('user.gruntfile', path.normalize(gruntfile));
   }
