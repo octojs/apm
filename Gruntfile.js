@@ -63,7 +63,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-stylus');
   }
 
+  grunt.loadTasks(path.join(__dirname, './tasks'));
+
   grunt.registerTask('build', [
+    'installdeps',
     'clean:dist', // delete dist direcotry first
 
     // build stylus
