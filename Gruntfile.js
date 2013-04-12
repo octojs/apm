@@ -48,25 +48,17 @@ module.exports = function(grunt) {
 
   if (grunt.loadGlobalTasks) {
     grunt.loadGlobalTasks('spm-alipay-suite');
-    var path = require('path');
-    var rootdir = path.dirname(require.resolve('spm/node_modules/grunt-spm-build'));
-    require(rootdir).initConfig(grunt, {pkg: pkg}, true);
-    var data = grunt.file.readJSON(path.join(rootdir, 'package.json'));
-    Object.keys(data.dependencies).forEach(function(name) {
-      var taskdir = path.join(rootdir, 'node_modules', name, 'tasks');
-      if (grunt.file.exists(taskdir)) {
-        grunt.loadTasks(taskdir);
-      }
-    });
   } else {
     grunt.loadNpmTasks('grunt-check-online');
     grunt.loadNpmTasks('grunt-contrib-stylus');
   }
 
-  grunt.loadTasks(path.join(__dirname, './tasks'));
+  var builder = require('spm-build')
+  grunt.util._.merge(grunt.config.data, builder.config)
+  builder.loadTasks();
 
   grunt.registerTask('build', [
-    'installdeps',
+    'spm-install',
     'clean:dist', // delete dist direcotry first
 
     // build stylus
@@ -88,7 +80,7 @@ module.exports = function(grunt) {
 
     // resource
     'clean:spm', // rm .build
-    'newline',
+    'spm-newline',
 
     'check-online'
   ]);
