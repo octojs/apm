@@ -46,16 +46,15 @@ module.exports = function(grunt) {
     }
   });
 
-  if (grunt.loadGlobalTasks) {
-    grunt.loadGlobalTasks('spm-alipay-suite');
-  } else {
-    grunt.loadNpmTasks('grunt-check-online');
-    grunt.loadNpmTasks('grunt-contrib-stylus');
+  if (!grunt.loadGlobalTasks) {
+    grunt.log.error("You shouldn't use grunt to run the tasks");
   }
+
+  grunt.loadGlobalTasks('spm-alipay-suite');
+  grunt.loadGlobalTasks('spm-build');
 
   var builder = require('spm-build')
   grunt.util._.merge(grunt.config.data, builder.config)
-  builder.loadTasks();
 
   grunt.registerTask('build', [
     'spm-install',
