@@ -11,7 +11,7 @@ module.exports = function(grunt) {
           server: 'https://a.alipayobjects.com'
         },
         files: [{
-          cwd: 'dist',
+          cwd: '.build/dist',
           src: '**/*',
           filter: 'isFile',
           dest: '<%= pkg.family %>/<%= pkg.name %>/<%= pkg.version %>'
@@ -51,9 +51,9 @@ module.exports = function(grunt) {
           beautify: false
         },
         files: [{
-          cwd: 'dist',
+          cwd: '.build/dist',
           src: '**/*.css',
-          dest: 'dist'
+          dest: '.build/dist'
         }]
       }
     }
@@ -66,35 +66,38 @@ module.exports = function(grunt) {
   grunt.loadGlobalTasks('spm-alipay-suite');
   grunt.loadGlobalTasks('spm-build');
 
-  var builder = require('spm-build')
-  grunt.util._.merge(grunt.config.data, builder.config)
+  var builder = require('spm-build');
+  grunt.util._.merge(grunt.config.data, builder.config);
 
   grunt.registerTask('build', [
-    'spm-install',
-    'clean:dist', // delete dist direcotry first
+    'clean:build', // delete build direcotry first
+
+    'spm-install', // install dependencies
 
     // build stylus
     'stylus', // src/*.styl -> .build/stylus/*.css
     'transport:stylus', // .build/stylus/*.css -> .build/src/*.css
 
     // build css
-    'transport:spm',  // src/* -> .build/src/*
+    'transport:src',  // src/* -> .build/src/*
     'concat:css',   // .build/src/*.css -> .build/dist/*.css
 
     // build js (must be invoke after css build)
     'transport:css',  // .build/dist/*.css -> .build/src/*.css.js
     'concat:js',  // .build/src/* -> .build/dist/*.js
 
-    // to dist
-    'copy:spm',
-    'cssmin:css',   // .build/dist/*.css -> dist/*.css
+    // to ./build/dist
+    'copy:build',
+    'cssmin:css',   // .build/tmp/*.css -> .build/dist/*.css
+    'uglify:js',  // .build/tmp/*.js -> .build/dist/*.js
+
+    'check-online',
     'peaches',
-    'uglify:js',  // .build/dist/*.js -> dist/*.js
 
-    // resource
-    'clean:spm', // rm .build
-    'spm-newline',
+    'clean:dist',
+    'copy:dist',  // .build/dist -> dist
+    'clean:build',
 
-    'check-online'
+    'spm-newline'
   ]);
 };
