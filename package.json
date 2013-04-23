@@ -1,12 +1,11 @@
 {
   "name": "spm-alipay-suite",
   "description": "A suite for alipay",
-  "version": "0.1.0a3",
+  "version": "0.1.0",
   "homepage": "https://github.com/spmjs/spm-alipay-suite",
   "author": {
     "name": "Hsiaoming Yang",
-    "email": "lepture@me.com",
-    "url": "http://lepture.com"
+    "email": "me@lepture.com"
   },
   "repository": {
     "type": "git",

@@ -17,6 +17,7 @@ try {
     spmrc.set('user.gruntfile', path.normalize(gruntfile));
   }
 } catch (e) {
+  console.log(e.message || e);
   console.log('  you need install spm to register the program');
   console.log();
   console.log('    \x1b[31m$ npm install spm -g\x1b[0m');
