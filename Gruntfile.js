@@ -43,6 +43,19 @@ module.exports = function(grunt) {
           dest: '.build/src'
         }]
       }
+    },
+
+    peaches: {
+      complie: {
+        options: {
+          beautify: false
+        },
+        files: [{
+          cwd: 'dist',
+          src: '**/*.css',
+          dest: 'dist'
+        }]
+      }
     }
   });
 
@@ -75,6 +88,7 @@ module.exports = function(grunt) {
     // to dist
     'copy:spm',
     'cssmin:css',   // .build/dist/*.css -> dist/*.css
+    'peaches',
     'uglify:js',  // .build/dist/*.js -> dist/*.js
 
     // resource

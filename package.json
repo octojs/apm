@@ -26,7 +26,8 @@
     "commander": "~1.1.1",
     "spmrc": "~0.1.3",
     "grunt-check-online": "~0.1.0",
-    "grunt-contrib-stylus": "~0.5.0"
+    "grunt-contrib-stylus": "~0.5.0",
+    "grunt-peaches": "~0.1.0"
   },
   "peerDependencies": {
     "spm-grunt": "~0.1.0"
