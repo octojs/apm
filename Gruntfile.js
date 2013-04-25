@@ -92,7 +92,7 @@ module.exports = function(grunt) {
     'uglify:js',  // .build/tmp/*.js -> .build/dist/*.js
 
     'check-online',
-    'peaches',
+    // 'peaches', wait for new peaches 0.5.0
 
     'clean:dist',
     'copy:dist',  // .build/dist -> dist
