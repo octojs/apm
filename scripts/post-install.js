@@ -16,6 +16,11 @@ try {
   if (!spmrc.get('user.gruntfile')) {
     spmrc.set('user.gruntfile', path.normalize(gruntfile));
   }
+  if (!spmrc.get('online-status')) {
+    spmrc.set('online-status.online', 'https://a.alipayobjects.com');
+    spmrc.set('online-status.test', 'https://a.test.alipay.net');
+    spmrc.set('online-status.dev', 'http://assets.dev.alipay.net');
+  }
 } catch (e) {
   console.log(e.message || e);
   console.log('  you need install spm to register the program');
@@ -44,7 +49,6 @@ gitInstall('https://github.com/aliceui/nico-alice.git', '~/.spm/themes/alice');
 function installModule(module) {
   if (!process.env.NODE_PATH) return;
   var p = path.join(process.env.NODE_PATH, module);
-  console.log(p);
   if (!fs.existsSync(p)) {
     spawn('npm', ['install', module, '-g'], {stdio: 'inherit'});
   }
@@ -55,6 +59,6 @@ function gitInstall(url, dest) {
   if (!fs.existsSync(dest)) {
     spawn('git', ['clone', url, dest], {stdio: 'inherit'});
   } else {
-    spawn('git', ['pull'], {stdio: 'inherit', 'cwd': dest});
+    spawn('git', ['pull', 'origin', 'master'], {stdio: 'inherit', 'cwd': dest});
   }
 }
