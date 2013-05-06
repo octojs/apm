@@ -22,8 +22,11 @@ try {
     spmrc.set('online-status.test', 'https://a.test.alipay.net');
     spmrc.set('online-status.dev', 'http://assets.dev.alipay.net');
   }
-  if (!spmrc.get('source')) {
-    spmrc.set('source.url', 'http://yuan.alipay.im');
+  if (!spmrc.get('source:default.url')) {
+    spmrc.set('source:default.url', 'http://yuan.alipay.im');
+  }
+  if (!spmrc.get('source:spmjs.url')) {
+    spmrc.set('source:spmjs.url', 'https://spmjs.org');
   }
 } catch (e) {
   console.log(e.message || e);
