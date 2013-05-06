@@ -13,6 +13,11 @@ try {
     binary: 'spm-zip',
     description: 'create a zip ball'
   });
+  spm.plugin.install({
+    name: 'check',
+    binary: 'spm-check',
+    description: 'check environment'
+  });
   var gruntfile = path.join(__dirname, '..', 'Gruntfile.js');
   if (!spmrc.get('user.gruntfile')) {
     spmrc.set('user.gruntfile', path.normalize(gruntfile));
