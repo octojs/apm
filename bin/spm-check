@@ -1,0 +1,103 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var path = require('path');
+var url = require('url');
+var https = require('https');
+var semver = require('semver');
+var spmrc = require('spmrc');
+require('colorful').colorful();
+
+var DEPS = 'https://raw.github.com/spmjs/spm-alipay-suite/master/scripts/deps.json';
+var DEPS_FILE = path.join(process.env.HOME || process.env.USERPROFILE, '.spm', 'deps.json');
+
+console.log('')
+
+/*
+  Check spmrc
+*/
+
+var gruntfile = path.join(__dirname, '..', 'Gruntfile.js');
+checkSpmrc('user.gruntfile', path.normalize(gruntfile));
+checkSpmrc('online-status.stable', 'https://a.alipayobjects.com');
+checkSpmrc('online-status.test', 'https://a.test.alipay.net');
+checkSpmrc('online-status.dev', 'http://assets.dev.alipay.net');
+checkSpmrc('source.default.url', 'http://yuan.alipay.im');
+checkSpmrc('source.spmjs.url', 'https://spmjs.org');
+
+/*
+  Check module version
+*/
+
+getDeps(function(deps) {
+  Object.keys(deps).forEach(function(module) {
+    checkModule(module, deps[module]);
+  });
+});
+
+// Helper
+// ------
+
+function checkSpmrc(key, value) {
+  assert(spmrc.get(key) === value,
+    'spmrc:' + key + ' is right',
+    'spmrc:' + key + ' should be ' + value + ' but ' + (spmrc.get(key) || '\"\"'));
+}
+
+function checkModule(module, version) {
+  if (!process.env.NODE_PATH) return;
+  var p = path.join(process.env.NODE_PATH, module);
+  if (fs.existsSync(p)) {
+    // ignore when wrong format pkg
+    try {
+      var pkg = require(path.join(p, 'package.json'));
+      assert(semver.gte(pkg.version, version),
+        module + ' has right version ' + pkg.version,
+        module + ' should granter than ' + version + ' but ' + pkg.version);
+    } catch(e) {}
+  }
+}
+
+/*
+  assertion
+*/
+
+function assert(condition, okMsg, failMsg) {
+  var print = ['        checked'.to.cyan.color, ': '];
+  print.push(condition ?
+    '✔ '.to.green.bold.color + okMsg :
+    ('✘ ' + failMsg).to.red.bold.color);
+  console.log(print.join(''));
+}
+
+/*
+  Get deps from server everyday
+*/
+
+function getDeps(callback) {
+  var local;
+  if (fs.existsSync(DEPS_FILE)) {
+    try {
+      local = require(DEPS_FILE);
+    } catch (e) {
+      console.log();
+      console.log('  Wrong Format: '.to.cyan.bold.color + DEPS_FILE);
+    }
+  }
+  var diff = local ? Math.floor((new Date().getTime() - local['_timestamp'])/86400000) : 0;
+  if (!local || diff >= 1 ) {
+    https.get(url.parse(DEPS), function(res) {
+      res.on('data', function(data) {
+        var j = JSON.parse(data.toString());
+        j['_timestamp'] = new Date().getTime();
+        fs.writeFile(DEPS_FILE, JSON.stringify(j), function (err) {
+          delete j['_timestamp'];
+          callback(j);
+        });
+      });
+    });
+  } else {
+    delete local['_timestamp'];
+    callback(local);
+  }
+}
