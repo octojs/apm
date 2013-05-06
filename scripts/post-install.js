@@ -4,6 +4,7 @@ var spawn = require('win-spawn');
 var fs = require('fs');
 var path = require('path');
 var spmrc = require('spmrc');
+var semver = require('semver');
 
 try {
   var spm = require('spm');
@@ -31,12 +32,11 @@ try {
   console.log();
 }
 
-installModule('spm');
-installModule('spm-init');
-installModule('spm-build');
-installModule('spm-status');
-installModule('spm-deploy');
-installModule('nico');
+// install dependencies in global
+var deps = require('./deps.json');
+Object.keys(deps).forEach(function(module) {
+  installModule(module, deps[module]);
+})
 
 // install spm-init templates
 gitInstall('git://github.com/aralejs/template-arale.git', '~/.spm/init/arale');
@@ -46,12 +46,17 @@ gitInstall('git://github.com/aralejs/template-alice.git', '~/.spm/init/alice');
 gitInstall('https://github.com/aralejs/nico-arale.git', '~/.spm/themes/arale');
 gitInstall('https://github.com/aliceui/nico-alice.git', '~/.spm/themes/alice');
 
-function installModule(module) {
+function installModule(module, version) {
   if (!process.env.NODE_PATH) return;
   var p = path.join(process.env.NODE_PATH, module);
-  if (!fs.existsSync(p)) {
-    spawn('npm', ['install', module, '-g'], {stdio: 'inherit'});
+  if (fs.existsSync(p)) {
+    // ignore when wrong format pkg
+    try {
+      var pkg = require(path.join(p, 'package.json'));
+      if (semver.gte(pkg.version, version)) return;
+    } catch(e) {}
   }
+  spawn('npm', ['install', module, '-g'], {stdio: 'inherit'});
 }
 
 function gitInstall(url, dest) {
