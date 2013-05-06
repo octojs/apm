@@ -39,7 +39,7 @@
   },
   "bin": {
     "spm-zip": "bin/spm-zip",
-    "spm-check": "bin/spm-check",
+    "spm-check": "bin/spm-check"
   },
   "keywords": [
     "spmplugin",
