@@ -21,6 +21,9 @@ try {
     spmrc.set('online-status.test', 'https://a.test.alipay.net');
     spmrc.set('online-status.dev', 'http://assets.dev.alipay.net');
   }
+  if (!spmrc.get('source')) {
+    spmrc.set('source.url', 'http://yuan.alipay.im');
+  }
 } catch (e) {
   console.log(e.message || e);
   console.log('  you need install spm to register the program');
