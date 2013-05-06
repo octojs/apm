@@ -18,7 +18,7 @@ try {
     spmrc.set('user.gruntfile', path.normalize(gruntfile));
   }
   if (!spmrc.get('online-status')) {
-    spmrc.set('online-status.online', 'https://a.alipayobjects.com');
+    spmrc.set('online-status.stable', 'https://a.alipayobjects.com');
     spmrc.set('online-status.test', 'https://a.test.alipay.net');
     spmrc.set('online-status.dev', 'http://assets.dev.alipay.net');
   }
