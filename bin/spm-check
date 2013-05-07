@@ -19,11 +19,12 @@ console.log('')
 
 var gruntfile = path.join(__dirname, '..', 'Gruntfile.js');
 checkSpmrc('user.gruntfile', path.normalize(gruntfile));
-checkSpmrc('online-status.stable', 'https://a.alipayobjects.com');
+checkSpmrc('online-status.online', 'https://a.alipayobjects.com');
 checkSpmrc('online-status.test', 'https://a.test.alipay.net');
 checkSpmrc('online-status.dev', 'http://assets.dev.alipay.net');
 checkSpmrc('source.default.url', 'http://yuan.alipay.im');
 checkSpmrc('source.spmjs.url', 'https://spmjs.org');
+checkSpmrc('source.alipay.url', 'http://yuan.alipay.im');
 
 /*
   Check module version
@@ -41,7 +42,7 @@ getDeps(function(deps) {
 function checkSpmrc(key, value) {
   assert(spmrc.get(key) === value,
     'spmrc:' + key + ' is right',
-    'spmrc:' + key + ' should be ' + value + ' but ' + (spmrc.get(key) || '\"\"'));
+    'spmrc:' + key + ' should be ' + value.to.red.bold.color + ' but ' + (spmrc.get(key) || '\"\"').to.red.bold.color);
 }
 
 function checkModule(module, version) {
@@ -66,7 +67,7 @@ function assert(condition, okMsg, failMsg) {
   var print = ['        checked'.to.cyan.color, ': '];
   print.push(condition ?
     '✔ '.to.green.bold.color + okMsg :
-    ('✘ ' + failMsg).to.red.bold.color);
+    ('✘ ').to.red.bold.color + failMsg);
   console.log(print.join(''));
 }
 
