@@ -33,6 +33,9 @@ try {
   if (!spmrc.get('source:spmjs.url')) {
     spmrc.set('source:spmjs.url', 'https://spmjs.org');
   }
+  if (!spmrc.get('source:alipay.url')) {
+    spmrc.set('source:alipay.url', 'http://yuan.alipay.im');
+  }
 } catch (e) {
   console.log(e.message || e);
   console.log('  you need install spm to register the program');
