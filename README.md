@@ -35,6 +35,8 @@ spm2 的 `package.json` 和 spm 略不相同，需要修改才能用这个工具
 
 - spm status 模块发布状态检测插件
 
+- spm check 检查 spm 配置环境和相关插件的版本是否正确
+
 - nico 静态文件构建工具
 
 - nico 所用到的 Arale 和 Alice 的静态文档模板
