@@ -54,7 +54,7 @@ function checkModule(module, version) {
       var pkg = require(path.join(p, 'package.json'));
       assert(semver.gte(pkg.version, version),
         module + ' has right version ' + pkg.version,
-        module + ' should granter than ' + version + ' but ' + pkg.version);
+        module + ' should granter than ' + version.to.red.bold.color + ' but ' + pkg.version.to.red.bold.color);
     } catch(e) {}
   }
 }
