@@ -4,5 +4,7 @@
   "spm-build": "0.2.0",
   "spm-status": "0.2.0",
   "spm-deploy": "0.1.4",
-  "nico": "0.3.1"
+  "nico": "0.3.1",
+  "cdn": "0.0.5",
+  "checkurl": "0.2.0"
 }
