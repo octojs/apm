@@ -16,6 +16,8 @@ $ npm install spm -g
 $ npm install spm-alipay-suit -g
 ```
 
+如果你的环境需要 `sudo`，请先阅读这篇文章：http://howtonode.org/introduction-to-npm
+
 ## Package.json
 
 spm2 的 `package.json` 和 spm 略不相同，需要修改才能用这个工具。
