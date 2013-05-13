@@ -13,8 +13,10 @@ $ npm install spm -g
 安装支付宝前端工具
 
 ```
-$ npm install spm-alipay-suit -g
+$ npm install spm-alipay-suite -g
 ```
+
+如果你的环境需要 `sudo`，请先阅读这篇文章：http://howtonode.org/introduction-to-npm
 
 ## Package.json
 
