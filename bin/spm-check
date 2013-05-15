@@ -11,8 +11,6 @@ require('colorful').colorful();
 var DEPS = 'https://raw.github.com/spmjs/spm-alipay-suite/master/scripts/deps.json';
 var DEPS_FILE = path.join(process.env.HOME || process.env.USERPROFILE, '.spm', 'deps.json');
 
-console.log('')
-
 /*
   Check spmrc
 */
@@ -25,6 +23,49 @@ checkSpmrc('online-status.dev', 'http://assets.dev.alipay.net');
 checkSpmrc('source.default.url', 'http://yuan.alipay.im');
 checkSpmrc('source.spmjs.url', 'https://spmjs.org');
 checkSpmrc('source.alipay.url', 'http://yuan.alipay.im');
+
+/*
+  Check environment
+*/
+
+// e.g. /usr/local/bin/node
+var nodeFile = process.execPath;
+// e.g. /usr/local
+var installDir = path.join(nodeFile, '..').replace(/[\\|\/]bin/, '');
+// e.g. /usr/local/bin
+var binDir = path.join(installDir, 'bin');
+// e.g. /usr/local/lib/node_modules
+var nodepath = path.join(installDir, 'lib', 'node_modules');
+
+
+
+// check directory permission
+// POSIX platforms should ignore sudo
+if (process.getuid) {
+  var stat = fs.lstatSync(installDir);
+  var cmd = 'sudo chown -R ' + process.env.USER + ' ' + installDir;
+  assert(stat.uid === process.getuid(),
+    installDir + ' is granted',
+    installDir + ' should be granted by ' + cmd.to.red.bold.color
+    );
+}
+
+// check PATH
+var isWindows = process.platform === 'win32';
+var hasPath = process.env.PATH
+  .split(isWindows ? ';' : ':')
+  .some(function(o) {
+    return o === binDir;
+  });
+assert(hasPath,
+  'PATH ' + binDir + ' is specified',
+  'PATH should be ' + binDir.to.red.bold.color);
+
+// check NODE_PATH
+assert(process.env.NODE_PATH && process.env.NODE_PATH === nodepath,
+  'NODE_PATH ' + nodepath + ' is specified',
+  'NODE_PATH should be ' + nodepath.to.red.bold.color
+  );
 
 /*
   Check module version
