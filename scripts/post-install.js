@@ -6,6 +6,12 @@ var path = require('path');
 var spmrc = require('spmrc');
 var semver = require('semver');
 
+// install dependencies in global
+var deps = require('./deps.json');
+Object.keys(deps).forEach(function(module) {
+  installModule(module, deps[module]);
+});
+
 try {
   var spm = require('spm');
   spm.plugin.install({
@@ -46,12 +52,6 @@ try {
   console.log();
 }
 
-// install dependencies in global
-var deps = require('./deps.json');
-Object.keys(deps).forEach(function(module) {
-  installModule(module, deps[module]);
-})
-
 // install spm-init templates
 gitInstall('git://github.com/aralejs/template-arale.git', '~/.spm/init/arale');
 gitInstall('git://github.com/aralejs/template-alice.git', '~/.spm/init/alice');
@@ -59,6 +59,10 @@ gitInstall('git://github.com/aralejs/template-alice.git', '~/.spm/init/alice');
 // install nico themes
 gitInstall('https://github.com/aralejs/nico-arale.git', '~/.spm/themes/arale');
 gitInstall('https://github.com/aliceui/nico-alice.git', '~/.spm/themes/alice');
+
+
+// Helper
+// ------
 
 function installModule(module, version) {
   if (!process.env.NODE_PATH) return;
