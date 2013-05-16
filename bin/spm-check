@@ -40,8 +40,8 @@ getDeps(function(deps) {
 
 if (errorHappend) {
   console.log('');
-  console.log('        Something wrong happend,'.red)
-  console.log('        Try "' + 'npm install spm-alipay-suite'.green +' -g" to fix it.');
+  console.log('        Something wrong happend.'.to.red.color);
+  console.log('        Try "' + 'npm install spm-alipay-suite'.to.green.color +' -g" to fix it.');
 }
 
 // Helper
