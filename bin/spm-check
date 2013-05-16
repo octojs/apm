@@ -35,8 +35,7 @@ var installDir = path.join(nodeFile, '..').replace(/[\\|\/]bin/, '');
 // e.g. /usr/local/bin
 var binDir = path.join(installDir, 'bin');
 // e.g. /usr/local/lib/node_modules
-var nodepath = path.join(installDir, 'lib', 'node_modules');
-
+var nodepath = __dirname.replace(/(\/|\\)spm-alipay-suite(\/|\\)bin$/, '');
 
 /*
   Check environment
@@ -67,6 +66,10 @@ assert(process.env.NODE_PATH && process.env.NODE_PATH === nodepath,
   'NODE_PATH should be ' + nodepath.to.red.bold.color
   );
 
+// check node and modules in same directory
+assert(nodepath === path.join(installDir, 'lib', 'node_modules'),
+  'nodeFile(' + nodeFile + ') and modules(' + nodepath + ') is in same directory',
+  'nodeFile(' + nodeFile + ') and modules(' + nodepath + ') is not in same directory');
 
 /*
   Check spmrc
