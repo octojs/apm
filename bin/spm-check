@@ -60,16 +60,19 @@ assert(hasPath,
   'PATH ' + binDir + ' is specified',
   'PATH should be ' + binDir.to.red.bold.color);
 
-// check NODE_PATH
-assert(process.env.NODE_PATH && process.env.NODE_PATH === nodepath,
-  'NODE_PATH ' + nodepath + ' is specified',
-  'NODE_PATH should be ' + nodepath.to.red.bold.color
-  );
+if (/node_modules$/.test(nodepath) && !fs.existsSync(path.join(nodepath, '.bin'))) {
+  // check NODE_PATH
+  assert(process.env.NODE_PATH && process.env.NODE_PATH === nodepath,
+    'NODE_PATH ' + nodepath + ' is specified',
+    'NODE_PATH should be ' + nodepath.to.red.bold.color
+    );
 
-// check node and modules in same directory
-assert(nodepath === path.join(installDir, 'lib', 'node_modules'),
-  'nodeFile(' + nodeFile + ') and modules(' + nodepath + ') is in same directory',
-  'nodeFile(' + nodeFile + ') and modules(' + nodepath + ') is not in same directory');
+  // check node and modules in same directory
+  assert(nodepath === path.join(installDir, 'lib', 'node_modules'),
+    'nodeFile(' + nodeFile + ') and modules(' + nodepath + ') is in same directory',
+    'nodeFile(' + nodeFile.to.red.bold.color + ') and modules(' + nodepath.to.red.bold.color + ') is not in same directory');
+}
+
 
 /*
   Check spmrc
