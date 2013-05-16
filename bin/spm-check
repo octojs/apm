@@ -8,6 +8,8 @@ var semver = require('semver');
 var spmrc = require('spmrc');
 require('colorful').colorful();
 
+var errorHappend = false;
+
 var DEPS = 'https://raw.github.com/spmjs/spm-alipay-suite/master/scripts/deps.json';
 var DEPS_FILE = path.join(process.env.HOME || process.env.USERPROFILE, '.spm', 'deps.json');
 
@@ -35,6 +37,12 @@ getDeps(function(deps) {
     checkModule(module, deps[module]);
   });
 });
+
+if (errorHappend) {
+  console.log('');
+  console.log('        Something wrong happend,'.red)
+  console.log('        Try "' + 'npm install spm-alipay-suite'.green +' -g" to fix it.');
+}
 
 // Helper
 // ------
@@ -64,6 +72,9 @@ function checkModule(module, version) {
 */
 
 function assert(condition, okMsg, failMsg) {
+  if (!condition) {
+    errorHappend = true;
+  }
   var print = ['        checked'.to.cyan.color, ': '];
   print.push(condition ?
     '✔ '.to.green.bold.color + okMsg :
