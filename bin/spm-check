@@ -11,25 +11,23 @@ require('colorful').colorful();
 var DEPS = 'https://raw.github.com/spmjs/spm-alipay-suite/master/scripts/deps.json';
 var DEPS_FILE = path.join(process.env.HOME || process.env.USERPROFILE, '.spm', 'deps.json');
 
-/*
-  Check spmrc
-*/
+var isWindows = process.platform === 'win32';
+var paths = process.env.PATH.split(isWindows ? ';' : ':');
 
-var gruntfile = path.join(__dirname, '..', 'Gruntfile.js');
-checkSpmrc('user.gruntfile', path.normalize(gruntfile));
-checkSpmrc('online-status.online', 'https://a.alipayobjects.com');
-checkSpmrc('online-status.test', 'https://a.test.alipay.net');
-checkSpmrc('online-status.dev', 'http://assets.dev.alipay.net');
-checkSpmrc('source.default.url', 'http://yuan.alipay.im');
-checkSpmrc('source.spmjs.url', 'https://spmjs.org');
-checkSpmrc('source.alipay.url', 'http://yuan.alipay.im');
-
-/*
-  Check environment
-*/
-
+// Get node file, `process.execPath` return symbolic link
 // e.g. /usr/local/bin/node
-var nodeFile = process.execPath;
+var nodeFile;
+var p = paths.filter(function(element) {
+  return fs.existsSync(path.join(element, 'node'));
+});
+if (p.length) {
+  // process.execPath
+  nodeFile = p[0];
+} else {
+  console.log('        node not exists');
+  process.exit(1);
+}
+
 // e.g. /usr/local
 var installDir = path.join(nodeFile, '..').replace(/[\\|\/]bin/, '');
 // e.g. /usr/local/bin
@@ -38,6 +36,9 @@ var binDir = path.join(installDir, 'bin');
 var nodepath = path.join(installDir, 'lib', 'node_modules');
 
 
+/*
+  Check environment
+*/
 
 // check directory permission
 // POSIX platforms should ignore sudo
@@ -51,12 +52,9 @@ if (process.getuid) {
 }
 
 // check PATH
-var isWindows = process.platform === 'win32';
-var hasPath = process.env.PATH
-  .split(isWindows ? ';' : ':')
-  .some(function(o) {
-    return o === binDir;
-  });
+var hasPath = paths.some(function(o) {
+  return o === binDir;
+});
 assert(hasPath,
   'PATH ' + binDir + ' is specified',
   'PATH should be ' + binDir.to.red.bold.color);
@@ -66,6 +64,21 @@ assert(process.env.NODE_PATH && process.env.NODE_PATH === nodepath,
   'NODE_PATH ' + nodepath + ' is specified',
   'NODE_PATH should be ' + nodepath.to.red.bold.color
   );
+
+
+/*
+  Check spmrc
+*/
+
+var gruntfile = path.join(__dirname, '..', 'Gruntfile.js');
+checkSpmrc('user.gruntfile', path.normalize(gruntfile));
+checkSpmrc('online-status.online', 'https://a.alipayobjects.com');
+checkSpmrc('online-status.test', 'https://a.test.alipay.net');
+checkSpmrc('online-status.dev', 'http://assets.dev.alipay.net');
+checkSpmrc('source.default.url', 'http://yuan.alipay.im');
+checkSpmrc('source.spmjs.url', 'https://spmjs.org');
+checkSpmrc('source.alipay.url', 'http://yuan.alipay.im');
+
 
 /*
   Check module version
