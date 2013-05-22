@@ -33,7 +33,8 @@ try {
     spmrc.set('online-status.test', 'https://a.test.alipay.net');
     spmrc.set('online-status.dev', 'http://assets.dev.alipay.net');
   }
-  if (!spmrc.get('source:default.url')) {
+  if (!spmrc.get('source:default.url') ||
+      spmrc.get('source:default.url') === 'https://spmjs.org') {
     spmrc.set('source:default.url', 'http://yuan.alipay.im');
   }
   if (!spmrc.get('source:spmjs.url')) {
