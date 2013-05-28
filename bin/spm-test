@@ -1,0 +1,38 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var path = require('path');
+var spawn = require('win-spawn');
+require('colorful').colorful();
+
+var args = process.argv.slice();
+
+/*
+  remove prefix command like spm-totoro
+*/
+
+while (args[0] && !/test$/.test(args[0])) {
+  args.shift();
+}
+args.shift();
+
+/*
+  add runner
+*/
+
+var i = args.indexOf('--runner');
+var runner = '_site/tests/runner.html';
+if (i > -1) {
+  args.splice(i + 1, 1, runner);
+} else {
+  args.push('--runner');
+  args.push(runner);
+}
+
+if (!fs.existsSync(path.resolve(runner))) {
+  console.log();
+  console.log(runner + ' not exist. You should run ' + 'make build-doc'.to.cyan.bold.color + ' or ' + 'nico build'.to.cyan.bold.color);
+  process.exit(1);
+}
+
+spawn('totoro', args, { stdio: 'inherit'});

@@ -24,6 +24,22 @@ try {
     binary: 'spm-check',
     description: 'check environment'
   });
+  spm.plugin.install({
+    name: 'test',
+    binary: 'spm-test',
+    description: 'A simple, easy-to-use and stable front-end unit testing tool'
+  });
+} catch (e) {
+  console.log(e.message || e);
+  console.log('  you need install spm to register the program');
+  console.log();
+  console.log('    \x1b[31m$ npm install spm -g\x1b[0m');
+  console.log();
+  console.log("  if you have installed spm, it maybe you haven't set a NODE_PATH environment variable");
+  console.log();
+}
+
+try {
   var gruntfile = path.join(__dirname, '..', 'Gruntfile.js');
   if (!spmrc.get('user.gruntfile')) {
     spmrc.set('user.gruntfile', path.normalize(gruntfile));
@@ -43,15 +59,7 @@ try {
   if (!spmrc.get('source:alipay.url')) {
     spmrc.set('source:alipay.url', 'http://yuan.alipay.im');
   }
-} catch (e) {
-  console.log(e.message || e);
-  console.log('  you need install spm to register the program');
-  console.log();
-  console.log('    \x1b[31m$ npm install spm -g\x1b[0m');
-  console.log();
-  console.log("  if you have installed spm, it maybe you haven't set a NODE_PATH environment variable");
-  console.log();
-}
+} catch (e) {}
 
 // install spm-init templates
 gitInstall('git://github.com/aralejs/template-arale.git', '~/.spm/init/arale');
