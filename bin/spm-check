@@ -96,13 +96,14 @@ getDeps(function(deps) {
   Object.keys(deps).forEach(function(module) {
     checkModule(module, deps[module]);
   });
+
+  if (errorHappend) {
+    console.log('');
+    console.log('        Something wrong happend.'.to.red.color);
+    console.log('        Try "' + 'npm install spm-alipay-suite  -g'.to.green.color +'" to fix it.');
+  }
 });
 
-if (errorHappend) {
-  console.log('');
-  console.log('        Something wrong happend.'.to.red.color);
-  console.log('        Try "' + 'npm install spm-alipay-suite  -g'.to.green.color +'" to fix it.');
-}
 
 // Helper
 // ------
