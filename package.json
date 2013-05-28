@@ -1,7 +1,7 @@
 {
   "name": "spm-alipay-suite",
   "description": "A suite for alipay",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "homepage": "https://github.com/spmjs/spm-alipay-suite",
   "author": {
     "name": "Hsiaoming Yang",
