@@ -2,6 +2,11 @@
 
 ---
 
+## 0.2.4
+
+- deps.json 添加 totoro
+- 增加 spm test 整合 totoro 的功能
+
 ## 0.2.3
 
 - 升级 cdn 版本
