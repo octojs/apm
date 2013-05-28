@@ -1,6 +1,6 @@
-var spawn = require('win-spawn');
 var spmrc = require('spmrc');
 var path = require('path');
+var runCommands = require('../lib/run-commands');
 
 module.exports = function(grunt) {
   grunt.registerTask('build-doc', 'Build document using nico', function(target) {
@@ -8,8 +8,10 @@ module.exports = function(grunt) {
       spmrc.get('user.home'),
       '.spm/themes/arale/nico.js'
     );
+
     var done = this.async();
-    var build = spawn('nico', ['build', '-C', nicoConfig], { stdio: 'inherit'});
-    build.on('close', done);
+    runCommands([
+      'nico build -C ' + nicoConfig
+    ])(done);
   });
 };
