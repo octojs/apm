@@ -59,6 +59,16 @@ module.exports = function(grunt) {
     }
   });
 
+  // add a hook to grunt.log.error()
+  // if version is online, stop task
+  grunt.util.hooker.hook(grunt.log, 'error', function(obj) {
+    if (obj === 'Error Status Code: 200') {
+      grunt.log.error("Above files is existed online, this version is already published!");
+      grunt.file.delete('.build');
+      process.exit(0);
+    }
+  });
+
   if (!grunt.loadGlobalTasks) {
     grunt.log.error("You shouldn't use grunt to run the tasks");
   }
