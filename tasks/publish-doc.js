@@ -10,7 +10,7 @@ module.exports = function(grunt) {
       spmrc.get('user.home'),
       '.spm/themes/' + theme + '/nico.js'
     );
-    var server = ['jquery', 'arale', 'gallery'].indexOf(pkg.family) > -1 ? 'spmjs' : 'alipay';
+    var server = ['jquery', 'arale', 'gallery', 'alice'].indexOf(pkg.family) > -1 ? 'spmjs' : 'alipay';
 
     var done = this.async();
     runCommands([
