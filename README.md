@@ -45,9 +45,9 @@ spm2 的 `package.json` 和 spm 略不相同，需要修改才能用这个工具
 
 - `spm zip` 打成 zip 包 ([文档](https://github.com/spmjs/spm-alipay-suite/#spm-zip))
 
-- `spm check` 检查 spm 配置环境和相关插件的版本是否正确
+- `spm check` 检查 spm 配置环境和相关插件的版本是否正确 ([文档](https://github.com/spmjs/spm-alipay-suite/#spm-check))
 
-- `spm test` 使用 totoro 跑测试用例
+- `spm test` 使用 totoro 跑测试用例 ([文档](https://github.com/totorojs/totoro))
 
 - `spm test-src` 使用 phantomjs 跑测试用例，使用 src 代码
 
@@ -57,9 +57,7 @@ spm2 的 `package.json` 和 spm 略不相同，需要修改才能用这个工具
 
 - `spm publish-doc` 将文档发布到源上
 
-- `spm coverage` 执行覆盖率工具，生成页面到 _site/coverage.html
-
-- `nico` 静态文件构建工具
+- `spm coverage` 执行覆盖率工具，生成页面到 `_site/coverage.html`
 
 - nico 所用到的 Arale 和 Alice 的静态文档模板
 
@@ -104,3 +102,11 @@ $ spm status arale/widget@1.0.3
 $ spm status arale              // 检测 arale 下所有模块
 $ spm status arale --error      // 只打印出报 404 的模块
 ```
+
+### spm check
+
+可以通过这个命令检查当前环境，排错时首推功能。
+
+- 检测 node 环境，如遇到错误可根据[文档](http://aralejs.org/docs/installation.html)进行配置。
+- 检测依赖库的版本是否过期，如遇到错误可重新安装。
+- 检测 spmrc 的配置是否正确，如遇到错误可修改 `~/.spm/spmrc` 文件对应的配置。
