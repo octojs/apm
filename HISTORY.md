@@ -2,6 +2,12 @@
 
 ---
 
+## 0.2.5
+
+- 支持 alice 的 theme
+- check-online 增强，如果存在则停止构建
+- shell 下增加自动补全
+
 ## 0.2.4
 
 - deps.json 添加 totoro
