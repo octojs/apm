@@ -1,0 +1,12 @@
+CMD="plugin config help info tree login search unpublish publish install cdn build deploy init status zip check test build-doc publish-doc test-src test-dist coverage"
+CMDARRAY=(plugin config help info tree login search unpublish publish install cdn build deploy init status zip check test build-doc publish-doc test-src test-dist coverage)
+
+# zsh
+type compctl > /dev/null 2>&1 && compctl -k CMDARRAY spm 
+
+# bash
+_spm_completion() {  
+  local word=${COMP_WORDS[COMP_CWORD]}
+  COMPREPLY=($(compgen -W "$CMD" -- "${word}"))
+}  
+type complete > /dev/null 2>&1 && complete -F _spm_completion spm
