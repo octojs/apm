@@ -3,6 +3,7 @@
   "spm-build": "0.3.2",
   "spm-status": "0.2.1",
   "spm-deploy": "0.2.0",
+  "spm-grunt": "0.1.5",
   "nico": "0.3.1",
   "cdn": "0.1.2",
   "checkurl": "0.2.1",
