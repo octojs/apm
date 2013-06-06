@@ -74,7 +74,7 @@ module.exports = function(grunt) {
   }
 
   grunt.loadGlobalTasks('spm-alipay-suite');
-  console.log(1)
+
   grunt.loadGlobalTasks('spm-build');
 
   var builder = require('spm-build');
