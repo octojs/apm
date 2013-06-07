@@ -11,7 +11,8 @@ require('colorful').colorful();
 var errorHappend = false;
 
 var DEPS = 'https://raw.github.com/spmjs/spm-alipay-suite/master/scripts/deps.json';
-var DEPS_FILE = path.join(process.env.HOME || process.env.USERPROFILE, '.spm', 'deps.json');
+var HOME = process.env.HOME || process.env.USERPROFILE;
+var DEPS_FILE = path.join(HOME, '.spm', 'deps.json');
 
 var isWindows = process.platform === 'win32';
 var paths = process.env.PATH.split(isWindows ? ';' : ':');
@@ -44,11 +45,19 @@ var nodepath = __dirname.replace(/(\/|\\)spm-alipay-suite(\/|\\)bin$/, '');
 // check directory permission
 // POSIX platforms should ignore sudo
 if (process.getuid) {
-  var stat = fs.lstatSync(installDir);
+  var stat1 = fs.lstatSync(installDir);
   var cmd = 'sudo chown -R ' + process.env.USER + ' ' + installDir;
-  assert(stat.uid === process.getuid(),
+  assert(stat1.uid === process.getuid(),
     installDir + ' is granted',
     installDir + ' should be granted by ' + cmd.to.red.bold.color
+    );
+
+  var npmCache = path.join(HOME, '.npm');
+  var stat2 = fs.lstatSync(npmCache);
+  var cmd = 'sudo chown -R ' + process.env.USER + ' ' + npmCache;
+  assert(stat2.uid === process.getuid(),
+    npmCache + ' is granted',
+    npmCache + ' should be granted by ' + cmd.to.red.bold.color
     );
 }
 
