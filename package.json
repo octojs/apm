@@ -28,7 +28,7 @@
     "grunt-contrib-stylus": "~0.5.0",
     "grunt-peaches": "~0.1.0",
     "semver": "~1.1.4",
-    "colorful": "~2.0.3"
+    "colorful": "~2.1.0"
   },
   "peerDependencies": {
     "spm-grunt": "~0.1.0"

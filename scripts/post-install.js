@@ -7,12 +7,20 @@ var spmrc = require('spmrc');
 var semver = require('semver');
 var runCommands = require('../lib/run-commands');
 
+require('colorful').toxic();
+
+console.log('Start Installing.'.cyan);
+console.log();
+console.log('Installing npm modules.'.cyan);
 
 // install dependencies in global
 var deps = require('./deps.json');
 Object.keys(deps).forEach(function(module) {
   installModule(module, deps[module]);
 });
+
+console.log();
+console.log('Installing plugin to spm.'.cyan);
 
 try {
   var spm = require('spm');
@@ -41,6 +49,9 @@ try {
   console.log();
 }
 
+console.log();
+console.log('Setting basic spmrc.'.cyan);
+
 try {
   var gruntfile = path.join(__dirname, '..', 'Gruntfile.js');
   if (!spmrc.get('user.gruntfile')) {
@@ -63,6 +74,9 @@ try {
   }
 } catch (e) {}
 
+console.log();
+console.log('Installing init template & nico template.'.cyan);
+
 // install spm-init templates
 gitInstall('git://github.com/aralejs/template-arale.git', '~/.spm/init/arale');
 gitInstall('git://github.com/aralejs/template-alice.git', '~/.spm/init/alice');
@@ -70,6 +84,9 @@ gitInstall('git://github.com/aralejs/template-alice.git', '~/.spm/init/alice');
 // install nico themes
 gitInstall('https://github.com/aralejs/nico-arale.git', '~/.spm/themes/arale');
 gitInstall('https://github.com/aliceui/nico-alice.git', '~/.spm/themes/alice');
+
+console.log();
+console.log('Installing spm completion.'.cyan);
 
 runCommands([
   ['cp', path.join(__dirname, '.spm_completion'), spmrc.get('user.home')].join(' ')
@@ -92,8 +109,12 @@ runCommands([
   }
 });
 
+console.log();
+console.log('Finish Installtion successfully!'.magenta);
+console.log();
+
 // Helper
-// ------
+// ---
 
 function installModule(module, version) {
   if (!process.env.NODE_PATH) return;
@@ -105,14 +126,17 @@ function installModule(module, version) {
       if (semver.gte(pkg.version, version)) return;
     } catch(e) {}
   }
-  spawn('npm', ['install', module, '-g'], {stdio: 'inherit'});
+  console.log(('  Installing npm module ' + module).green);  
+  spawn('npm', ['install', module, '-g'], {stdio: [null, null, null]});
 }
 
 function gitInstall(url, dest) {
   dest = dest.replace('~', spmrc.get('user.home'));
   if (!fs.existsSync(dest)) {
-    spawn('git', ['clone', url, dest], {stdio: 'inherit'});
+    console.log(('  Installing ' + url + ' to ' + dest).green);
+    spawn('git', ['clone', url, dest], {stdio: [null, null, null]});
   } else {
-    spawn('git', ['pull', 'origin', 'master'], {stdio: 'inherit', 'cwd': dest});
+    console.log(('  Updating ' + url + ' to ' + dest).green);
+    spawn('git', ['pull', 'origin', 'master'], {stdio: [null, null, null], 'cwd': dest});
   }
 }
