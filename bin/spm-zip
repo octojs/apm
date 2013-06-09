@@ -9,6 +9,7 @@ commander.usage('[options]');
 commander
   .option('-I, --input <dir>', 'input directory: [dist]')
   .option('-O, --output <zipfile>', 'output zipfile')
+  .option('-s, --source <name>', 'source name of yuan')
   .option('--format <format>', 'directory format: [{{family}}/{{name}}/{{version}}]')
 
 commander.on('--help', function() {
@@ -26,6 +27,7 @@ commander.parse(process.argv);
 console.log();
 
 var options = {};
+options.source = commander.source;
 options.src = commander.input;
 options.dest = commander.output;
 options.basedir = commander.format;
