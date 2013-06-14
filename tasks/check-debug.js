@@ -18,7 +18,7 @@ module.exports = function(grunt) {
           // -debug 文件不允许出现 -debug-debug
           // 其他不允许出现 -debug
           if (filepath.indexOf('-debug.js') > 0 && 
-            content.indexOf('-debug-debug')) {
+            content.indexOf('-debug-debug') > 0) {
               grunt.log.warn(filepath + ' has "-debug-debug" words.');
               grunt.log.warn('There is debug denpendency in your code!');
               grunt.log.error('check-debug-fail');
@@ -28,7 +28,8 @@ module.exports = function(grunt) {
 
       });
     });
-
+    
+    done();
 
   });
 };
