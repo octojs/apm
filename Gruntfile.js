@@ -19,6 +19,15 @@ module.exports = function(grunt) {
       }
     },
 
+    'check-debug': {
+      dist: {
+        files: [{
+          cwd: '.build/dist',
+          src: '**/*'
+        }]
+      }
+    },
+
     stylus: {
       compile: {
         files: [{
@@ -60,10 +69,15 @@ module.exports = function(grunt) {
   });
 
   // add a hook to grunt.log.error()
-  // if version is online, stop task
+  //   - if version is online, stop task
+  //   - if distfile has -debug-debug code, stop task
   grunt.util.hooker.hook(grunt.log, 'error', function(obj) {
     if (obj === 'Error Status Code: 200') {
       grunt.log.error("Above files is existed online, this version is already published!");
+      grunt.file.delete('.build');
+      process.exit(0);
+    } else if (obj === 'check-debug-fail') {
+      grunt.log.error('Check debug fail.');
       grunt.file.delete('.build');
       process.exit(0);
     }
@@ -102,6 +116,7 @@ module.exports = function(grunt) {
     'cssmin:css',   // .build/tmp/*.css -> .build/dist/*.css
     'uglify:js',  // .build/tmp/*.js -> .build/dist/*.js
 
+    'check-debug',
     'check-online',
     // 'peaches', wait for new peaches 0.5.0
 
