@@ -8,7 +8,12 @@ module.exports = function(grunt) {
         options: {
           // status code should be 404
           statusCode: 404,
-          server: 'https://a.alipayobjects.com'
+          server: 'https://a.alipayobjects.com',
+          onFailure: function() {
+            grunt.log.error("Above files is existed online, this version is already published!");
+            grunt.file.delete('.build');
+            process.exit(0);
+          }
         },
         files: [{
           cwd: '.build/dist',
@@ -21,6 +26,12 @@ module.exports = function(grunt) {
 
     'check-debug': {
       dist: {
+        options: {
+          onFailure: function() {
+            grunt.file.delete('.build');
+            process.exit(0);
+          } 
+        },
         files: [{
           cwd: '.build/dist',
           src: '**/*'
@@ -65,21 +76,6 @@ module.exports = function(grunt) {
           dest: '.build/dist'
         }]
       }
-    }
-  });
-
-  // add a hook to grunt.log.error()
-  //   - if version is online, stop task
-  //   - if distfile has -debug-debug code, stop task
-  grunt.util.hooker.hook(grunt.log, 'error', function(obj) {
-    if (obj === 'Error Status Code: 200') {
-      grunt.log.error("Above files is existed online, this version is already published!");
-      grunt.file.delete('.build');
-      process.exit(0);
-    } else if (obj === 'check-debug-fail') {
-      grunt.log.error('Check debug fail.');
-      grunt.file.delete('.build');
-      process.exit(0);
     }
   });
 

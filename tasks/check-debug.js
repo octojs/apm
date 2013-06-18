@@ -3,6 +3,10 @@ var path = require('path');
 module.exports = function(grunt) {
   grunt.registerMultiTask('check-debug', 'Check if the dist file has "-debug" words.', function() {
     
+    var options = this.options({
+      onFailure: null
+    });
+
     var done = this.async();
 
     var distfiles = [];
@@ -19,9 +23,9 @@ module.exports = function(grunt) {
           // 其他不允许出现 -debug
           if (filepath.indexOf('-debug.js') > 0 && 
             content.indexOf('-debug-debug') > 0) {
-              grunt.log.warn(filepath + ' has "-debug-debug" words.');
-              grunt.log.warn('There is debug denpendency in your code!');
-              grunt.log.error('check-debug-fail');
+              grunt.log.error(filepath + ' has "-debug-debug" words.');
+              grunt.log.error('There is debug denpendency in your code!');
+              options.onFailure && options.onFailure();
               done(false);
           }
         }
