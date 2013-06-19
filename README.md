@@ -65,7 +65,7 @@ spm2 的 `package.json` 和 spm 略不相同，需要修改才能用这个工具
 
 - check-online 构建时检测该模块是否已发到线上
 
-- [peaches](http://peaches.io) 雪碧图片合并工具（还未添加）
+- [peaches](http://peaches.io) 雪碧图片合并工具
 
 
 ## 具体使用说明
@@ -110,3 +110,14 @@ $ spm status arale --error      // 只打印出报 404 的模块
 - 检测 node 环境，如遇到错误可根据[文档](http://aralejs.org/docs/installation.html)进行配置。
 - 检测依赖库的版本是否过期，如遇到错误可重新安装。
 - 检测 spmrc 的配置是否正确，如遇到错误可修改 `~/.spm/spmrc` 文件对应的配置。
+
+### peaches
+
+在 package.json 中添加如下属性就可以启动 peaches 服务。spm build 时会帮你合并所有的背景图片。
+
+```
+  "spm": {
+    "peaches": true
+  }
+```
+
