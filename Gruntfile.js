@@ -90,7 +90,7 @@ module.exports = function(grunt) {
   var builder = require('spm-build');
   grunt.util._.merge(grunt.config.data, builder.config);
 
-  grunt.registerTask('build', [
+  var taskList = [
     'clean:build', // delete build direcotry first
 
     'spm-install', // install dependencies
@@ -114,12 +114,18 @@ module.exports = function(grunt) {
 
     'check-debug',
     'check-online',
-    // 'peaches', wait for new peaches 0.5.0
+    'peaches',
 
     'clean:dist',
     'copy:dist',  // .build/dist -> dist
     'clean:build',
 
     'spm-newline'
-  ]);
+  ];
+
+  if (!pkg.spm.peaches) {
+    taskList.splice(taskList.indexOf('peaches'), 1);
+  }
+
+  grunt.registerTask('build', taskList);
 };
