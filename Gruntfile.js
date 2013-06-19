@@ -66,7 +66,7 @@ module.exports = function(grunt) {
     },
 
     peaches: {
-      complie: {
+      sprite: {
         options: {
           beautify: false
         },
