@@ -37,6 +37,11 @@ try {
   spm.plugin.install({
     name: 'test',
     binary: 'spm-test',
+    description: 'A local testing tool on phantomjs'
+  });
+  spm.plugin.install({
+    name: 'totoro',
+    binary: 'spm-totoro',
     description: 'A simple, easy-to-use and stable front-end unit testing tool'
   });
 } catch (e) {
