@@ -41,7 +41,8 @@
   "bin": {
     "spm-zip": "bin/spm-zip",
     "spm-check": "bin/spm-check",
-    "spm-test": "bin/spm-test"
+    "spm-test": "bin/spm-test",
+    "spm-totoro": "bin/spm-totoro"
   },
   "keywords": [
     "spmplugin",
