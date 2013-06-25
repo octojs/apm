@@ -37,12 +37,12 @@ try {
   spm.plugin.install({
     name: 'test',
     binary: 'spm-test',
-    description: 'A local testing tool on phantomjs'
+    description: 'test your code in local by phantomjs'
   });
   spm.plugin.install({
     name: 'totoro',
     binary: 'spm-totoro',
-    description: 'A simple, easy-to-use front-end testing tool on totoro'
+    description: 'test your code in A-grade browsers by totoro'
   });
 } catch (e) {
   console.log(e.message || e);
