@@ -5,6 +5,9 @@
 ## 0.3.0
 
 - 添加 peaches 支持。
+- 完成 spm-doc 插件的功能集成。
+- 将 spm-test 改名为 spm-totoro。
+- 添加新的 spm-test 功能。
 
 ## 0.2.6
 
