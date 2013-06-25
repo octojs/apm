@@ -42,7 +42,7 @@ try {
   spm.plugin.install({
     name: 'totoro',
     binary: 'spm-totoro',
-    description: 'A simple, easy-to-use and stable front-end unit testing tool'
+    description: 'A simple, easy-to-use and stable front-end unit testing tool on totoro'
   });
 } catch (e) {
   console.log(e.message || e);

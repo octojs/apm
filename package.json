@@ -28,6 +28,7 @@
     "grunt-contrib-stylus": "~0.5.0",
     "grunt-peaches": "~0.1.1",
     "semver": "~1.1.4",
+    "jsdom": "~0.6.5",
     "colorful": "~2.1.0"
   },
   "peerDependencies": {
