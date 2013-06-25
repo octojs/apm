@@ -8,5 +8,6 @@
   "cdn": "0.1.3",
   "checkurl": "0.2.1",
   "spm-alipay-suite": "0.2.6",
-  "totoro": "0.2.2"
+  "totoro": "0.2.2",
+  "jscoverage": "0.3.7"
 }

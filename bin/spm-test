@@ -1,23 +1,25 @@
 #!/usr/bin/env node
 
 var runCommands = require('../lib/run-commands');
-
-runCommands([
-  'mocha-browser _site/tests/runner.html -S'
-])(done);
-
-runCommands([
-  'mocha-browser _site/tests/runner.html?dist -S'
-])(done);
-
+var jsdom = require('jsdom');
+var fs = require('fs');
 var output = '_site/coverage.html';
-var done = this.async();
+require('colorful').colorful();
+
 runCommands([
+  'mocha-browser _site/tests/runner.html -S',
+  'mocha-browser _site/tests/runner.html?dist -S',
   'rm -fr _site/src-cov',
   'jscoverage --encoding=utf8 src _site/src-cov',
   'mocha-browser _site/tests/runner.html?cov -S -R html-cov > ' + output
 ])(function() {
-  console.log();
-  grunt.log.writeln('coverage build to ' + output);
-  done();
+  var html = fs.readFileSync(output);
+  var jsdom = require("jsdom").jsdom;
+  var document = jsdom(html);
+  var window = document.createWindow();
+  var percentage = window.document.querySelectorAll('#stats .percentage')[0].innerHTML;
+  var sloc = window.document.querySelectorAll('#stats .sloc')[0].innerHTML;
+
+  console.log('  ' + percentage.to.green + ' coverage, ' + sloc.to.green + ' sloc');
+  console.log('  You can see more detail in ' + output.to.cyan);
 });
