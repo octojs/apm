@@ -131,7 +131,7 @@ function installModule(module, version) {
       if (semver.gte(pkg.version, version)) return;
     } catch(e) {}
   }
-  console.log(('  Installing npm module ' + module).green);  
+  console.log(('  Installing npm module ' + module + '@' + version).green);  
   spawn('npm', ['install', module, '-g'], {stdio: [null, null, null]});
 }
 

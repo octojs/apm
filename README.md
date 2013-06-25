@@ -35,7 +35,15 @@ spm2 的 `package.json` 和 spm 略不相同，需要修改才能用这个工具
 
 - spm 包管理工具 ([文档](http://docs.spmjs.org/en/index))
 
-- `spm build` 构建插件 
+- `spm build` 构建插件，根据源码和 package.json 来构建标准的 CMD 模块。
+
+  * stylus 编译功能（当 src 目录中有 *.styl 文件时，`spm build` 会自动构建出对应的 css 文件）
+
+  * check-online 构建时检测该模块是否已发到线上。
+
+  * check-debug 构建时检测是否打包了 xxx-debug 的依赖。
+
+  * [peaches](http://peaches.io) 构建时自动合并雪碧图片。
 
 - `spm deploy` 部署插件 ([文档](https://github.com/spmjs/spm-alipay-suite/#spm-deploy))
 
@@ -47,25 +55,23 @@ spm2 的 `package.json` 和 spm 略不相同，需要修改才能用这个工具
 
 - `spm check` 检查 spm 配置环境和相关插件的版本是否正确 ([文档](https://github.com/spmjs/spm-alipay-suite/#spm-check))
 
-- `spm test` 使用 totoro 跑测试用例 ([文档](https://github.com/totorojs/totoro))
+- `spm test` 使用 phantomjs 跑测试用例，测试 src 和 dist 代码，并使用 jscoverage 生成覆盖率文档。
 
-- `spm test-src` 使用 phantomjs 跑测试用例，使用 src 代码
+- `spm totoro` 使用 totoro 跑测试用例 ([文档](https://github.com/totorojs/totoro))
 
-- `spm test-dist` 使用 phantomjs 跑测试用例，使用 dist 代码
+- `spm doc` 文档管理工具。
 
-- `spm build-doc` 生成文档到 _site 目录下
+  * `spm doc build` 生成文档到 _site 目录下。
+  
+  * `spm doc server` 在 _site 目录启动一个服务用于调试文档。
+  
+  * `spm doc watch` 在 _site 目录启动一个服务用于调试，并监听源码改动，实时刷新。
 
-- `spm publish-doc` 将文档发布到源上
+  * `spm doc publish` 将文档发布到源上。
 
-- `spm coverage` 执行覆盖率工具，生成页面到 `_site/coverage.html`
+  * `spm doc clean` 清除 _site 目录。
 
-- nico 所用到的 Arale 和 Alice 的静态文档模板
-
-- stylus 编译功能（当 src 目录中有 *.styl 文件时，`spm build` 会自动构建出对应的 css 文件）
-
-- check-online 构建时检测该模块是否已发到线上
-
-- [peaches](http://peaches.io) 雪碧图片合并工具
+- 安装 spm doc 所用到的 Arale 和 Alice 的静态文档模板。
 
 
 ## 具体使用说明
