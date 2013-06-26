@@ -17,9 +17,22 @@ runCommands([
   var jsdom = require("jsdom").jsdom;
   var document = jsdom(html);
   var window = document.createWindow();
-  var percentage = window.document.querySelectorAll('#stats .percentage')[0].innerHTML;
-  var sloc = window.document.querySelectorAll('#stats .sloc')[0].innerHTML;
+  var $ = function(selector) {
+    return window.document.querySelectorAll(selector);
+  };
 
+  var percentage = $('#stats .percentage')[0].innerHTML;
+  var sloc = $('#stats .sloc')[0].innerHTML;
   console.log('  ' + percentage.to.green + ' coverage, ' + sloc.to.green + ' sloc');
-  console.log('  You can see more detail in ' + output.to.cyan);
+
+  var filesNode =  $('#files .file');
+  for (var i=0; i<filesNode.length; i++) {
+    var fileName = filesNode[i].querySelectorAll('h2')[0].innerHTML;
+    var filePercentage = filesNode[i].querySelectorAll('.percentage')[0].innerHTML;
+    var fileSloc = filesNode[i].querySelectorAll('.sloc')[0].innerHTML;
+    console.log('    ' + (fileName + ': ').to.grey + filePercentage.to.green + ' coverage, '.to.grey + fileSloc.to.green + ' sloc'.to.grey);
+  }
+
+  console.log('  You can see more detail in ' + output.to.cyan);  
+
 });
