@@ -35,7 +35,7 @@ spm2 的 `package.json` 和 spm 略不相同，需要修改才能用这个工具
 
 - spm 包管理工具 ([文档](http://docs.spmjs.org/en/index))
 
-- `spm build` 构建插件 
+- `spm build` 构建插件 ([文档](https://github.com/spmjs/spm-alipay-suite/blob/master/docs/spm-build.md))
 
 - `spm deploy` 部署插件 ([文档](https://github.com/spmjs/spm-alipay-suite/#spm-deploy))
 
