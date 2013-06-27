@@ -1,19 +1,17 @@
-# spm alipay suite
+# apm
 
--------
+Alipay package manager, a alipay suite of tools base on spm.
+
+> 0.3.0 版本后 spm-alipay-suite 改名为 apm.
+
+---
+
+这是一个基于 `spm2.x` 的套件集合，你可能需要先了解下 [spm](https://github.com/spmjs/spm2/)。
 
 ## 安装
 
-先安装 spm2
-
 ```
-$ npm install spm -g
-```
-
-安装支付宝前端工具
-
-```
-$ npm install spm-alipay-suite -g
+$ npm install apm -g
 ```
 
 如果你的环境需要 `sudo`，请先阅读这篇文章：http://aralejs.org/docs/installation.html
@@ -26,7 +24,7 @@ $ spm check
 
 ## Package.json
 
-spm2 的 `package.json` 和 spm 略不相同，需要修改才能用这个工具。
+`spm2.x` 的 `package.json` 和 `spm1.x` 略不相同，需要修改才能用这个工具。
 
 查看[package.json](http://docs.spmjs.org/en/package)
 
