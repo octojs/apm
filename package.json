@@ -36,7 +36,8 @@
     "spm-grunt": "~0.1.0"
   },
   "scripts": {
-    "postinstall": "node scripts/post-install.js",
+    "preuninstall": "node scripts/preuninstall.js",
+    "postinstall": "node scripts/postinstall.js",
     "uninstall": "node scripts/uninstall.js"
   },
   "bin": {
