@@ -15,7 +15,7 @@ $ npm install apm -g
 ```
 
 如果你之前安装过 `spm-alipay-suite`，在安装过程中可能会报 `Error: Refusing to delete` 的错误。
-此时不要着急，淡定得加上 `-f` 强制安装即可。
+此时不要着急，淡定地加上 `-f` 强制安装即可。
 
 ```
 $ npm install apm -g -f
