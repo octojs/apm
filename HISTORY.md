@@ -7,7 +7,7 @@
 - 添加 peaches 支持。
 - 完成 spm-doc 插件的功能集成。
 - 将 spm-test 改名为 spm-totoro。
-- 添加新的 spm-test 功能。
+- 添加新的 spm-test 功能，进行本地测试和输出覆盖率。
 
 ## 0.2.6
 
