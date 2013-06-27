@@ -109,7 +109,7 @@ getDeps(function(deps) {
   if (errorHappend) {
     console.log('');
     console.log('        Something wrong happend.'.to.red.color);
-    console.log('        Try "' + 'npm install apm  -g'.to.green.color +'" to fix it.');
+    console.log('        Try "' + 'npm install apm -g'.to.green.color +'" to fix it.');
   }
 });
 
