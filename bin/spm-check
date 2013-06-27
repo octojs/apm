@@ -10,7 +10,7 @@ require('colorful').colorful();
 
 var errorHappend = false;
 
-var DEPS = 'https://raw.github.com/spmjs/spm-alipay-suite/master/scripts/deps.json';
+var DEPS = 'https://raw.github.com/spmjs/apm/master/scripts/deps.json';
 var HOME = process.env.HOME || process.env.USERPROFILE;
 var DEPS_FILE = path.join(HOME, '.spm', 'deps.json');
 
@@ -36,7 +36,7 @@ var installDir = path.join(nodeFile, '..').replace(/[\\|\/]bin/, '');
 // e.g. /usr/local/bin
 var binDir = path.join(installDir, 'bin');
 // e.g. /usr/local/lib/node_modules
-var nodepath = __dirname.replace(/(\/|\\)spm-alipay-suite(\/|\\)bin$/, '');
+var nodepath = __dirname.replace(/(\/|\\)apm(\/|\\)bin$/, '');
 
 /*
   Check environment
@@ -109,7 +109,7 @@ getDeps(function(deps) {
   if (errorHappend) {
     console.log('');
     console.log('        Something wrong happend.'.to.red.color);
-    console.log('        Try "' + 'npm install spm-alipay-suite  -g'.to.green.color +'" to fix it.');
+    console.log('        Try "' + 'npm install apm  -g'.to.green.color +'" to fix it.');
   }
 });
 
