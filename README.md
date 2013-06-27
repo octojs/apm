@@ -14,6 +14,13 @@ Alipay package manager, a alipay suite of tools base on spm.
 $ npm install apm -g
 ```
 
+如果你之前安装过 `spm-alipay-suite`，在安装过程中可能会报 `Error: Refusing to delete` 的错误。
+此时不要着急，淡定得加上 `-f` 强制安装即可。
+
+```
+$ npm install apm -g -f
+```
+
 如果你的环境需要 `sudo`，请先阅读这篇文章：http://aralejs.org/docs/installation.html
 
 安装完后可以检查下你的环境
