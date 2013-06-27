@@ -4,6 +4,7 @@
 
 ## 0.3.0
 
+- 改名为 apm，集成 spm 的安装。
 - 添加 peaches 支持。
 - 完成 spm-doc 插件的功能集成。
 - 将 spm-test 改名为 spm-totoro。
