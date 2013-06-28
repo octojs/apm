@@ -34,25 +34,29 @@ async.waterfall([
     },
     function(callback) {
       console.log();
-      console.log('Installing plugin to spm.'.cyan);
+      console.log('Installing spm plugins.'.cyan);
 
       try {
         var spm = require('spm');
+        console.log(' Installing spm plugin spm-zip.'.green);
         spm.plugin.install({
           name: 'zip',
           binary: 'spm-zip',
           description: 'create a zip ball'
         });
+        console.log(' Installing spm plugin spm-check.'.green);        
         spm.plugin.install({
           name: 'check',
           binary: 'spm-check',
           description: 'check environment'
         });
+        console.log(' Installing spm plugin spm-test.'.green);        
         spm.plugin.install({
           name: 'test',
           binary: 'spm-test',
           description: 'test your code in local by phantomjs'
         });
+        console.log(' Installing spm plugin spm-totoro.'.green);        
         spm.plugin.install({
           name: 'totoro',
           binary: 'spm-totoro',
@@ -153,7 +157,7 @@ async.waterfall([
 // optional callback
 function(err, results){
   console.log();
-  console.log('Finish Installtion successfully!'.magenta);
+  console.log('Finish Installtion successfully!'.green);
   console.log();
 });
 
@@ -185,8 +189,7 @@ function installModule(module, version, callback) {
   ])(callback);
 
   function skip(message) {
-    console.log(('  Skip npm module ' + module + '@' + version).green + '
-    console.log(('    Because of ' + message).grey);    
+    console.log(('  Skip npm module ' + module + '@' + version + ', because ' + message).grey);
     callback();
   }
 }
