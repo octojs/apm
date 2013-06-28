@@ -83,7 +83,7 @@ module.exports = function(grunt) {
     grunt.log.error("You shouldn't use grunt to run the tasks");
   }
 
-  grunt.loadGlobalTasks('spm-alipay-suite');
+  grunt.loadGlobalTasks('apm');
 
   grunt.loadGlobalTasks('spm-build');
 
