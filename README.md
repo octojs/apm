@@ -139,7 +139,9 @@ $ spm doc publish
 
 ### peaches 雪碧图自动合并
 
-在 package.json 中添加如下属性就可以启动 peaches 服务。spm build 时会帮你合并所有的背景图片。
+具体功能可以查看 [peaches官网](http://peaches.io/) 和 [范例](https://github.com/afc163/peaches-example)。
+
+我们在 apm 中集成了peaches，在 package.json 中添加如下属性就可以启动 peaches 服务。调用 `spm build` 进行打包时时会自动帮你合并所有的背景图片。
 
 ```
   "spm": {
