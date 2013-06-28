@@ -72,7 +72,7 @@ async.waterfall([
     },
     function(callback) {
       console.log();
-      console.log('Setting basic spmrc.'.cyan);
+      console.log('Setting your spmrc file.'.cyan);
 
       try {
         var gruntfile = path.join(__dirname, '..', 'Gruntfile.js');
@@ -162,7 +162,7 @@ function(err, results){
 
 function installModule(module, version, callback) {
   if (!process.env.NODE_PATH) {
-    callback();
+    skip('Can\'t found NODE_PATH.');
     return;
   }
   var p = path.join(process.env.NODE_PATH, module);
@@ -171,11 +171,11 @@ function installModule(module, version, callback) {
     try {
       var pkg = require(path.join(p, 'package.json'));
       if (semver.gte(pkg.version, version)) {
-        callback();
+        skip(version + ' has been installed.');
         return;
       }
     } catch(e) {
-      callback();
+      skip(e);
       return;
     }
   }
@@ -183,6 +183,12 @@ function installModule(module, version, callback) {
   runCommands([
     'npm install ' + module + ' -g --silent'
   ])(callback);
+
+  function skip(message) {
+    console.log(('  Skip npm module ' + module + '@' + version).green + '
+    console.log(('    Because of ' + message).grey);    
+    callback();
+  }
 }
 
 function gitInstall(url, dest, callback) {
