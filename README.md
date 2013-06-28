@@ -40,7 +40,8 @@ $ spm check
 
 - spm 包管理工具 ([文档](http://docs.spmjs.org/en/index))
 
-- `spm build` 构建插件，根据源码和 package.json 来构建标准的 CMD 模块。
+- `spm build` 构建插件([文档](https://github.com/spmjs/spm-alipay-suite/blob/master/docs/spm-build.md))，
+   根据源码和 package.json 来构建标准的 CMD 模块。
 
   * stylus 编译功能（当 src 目录中有 *.styl 文件时，`spm build` 会自动构建出对应的 css 文件）
 
