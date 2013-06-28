@@ -114,6 +114,20 @@ $ spm status arale              // 检测 arale 下所有模块
 $ spm status arale --error      // 只打印出报 404 的模块
 ```
 
+### spm doc
+
+Arale 和 Alice 模块的文档解决方案，是对原有 nico 方案的封装。
+
+安装 spm doc 后可以不再使用 Makefile 里面的功能。
+
+```
+$ spm doc clean
+$ spm doc build
+$ spm doc server
+$ spm doc watch
+$ spm doc publish
+```
+
 ### spm check
 
 可以通过这个命令检查当前环境，排错时首推功能。
@@ -122,7 +136,7 @@ $ spm status arale --error      // 只打印出报 404 的模块
 - 检测依赖库的版本是否过期，如遇到错误可重新安装。
 - 检测 spmrc 的配置是否正确，如遇到错误可修改 `~/.spm/spmrc` 文件对应的配置。
 
-### peaches
+### peaches 雪碧图自动合并
 
 在 package.json 中添加如下属性就可以启动 peaches 服务。spm build 时会帮你合并所有的背景图片。
 
@@ -131,4 +145,18 @@ $ spm status arale --error      // 只打印出报 404 的模块
     "peaches": true
   }
 ```
+
+### styleBox
+
+样式隔离方案，具体功能见 [aliceui/aliceui.org#9](https://github.com/aliceui/aliceui.org/issues/9)
+
+在 package.json 中添加如下属性就可以启动样式隔离。spm build 时会帮你把 JS 中 require 的样式进行封装。
+
+```
+  "spm": {
+    "styleBox": true
+  }
+```
+
+> 注：需要配合 [arale/widget@1.1.0+](http://aralejs.org/widget) 进行使用。
 
