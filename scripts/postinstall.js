@@ -81,7 +81,7 @@ async.waterfall([
       try {
         var gruntfile = path.join(__dirname, '..', 'Gruntfile.js');
         if (!spmrc.get('user.gruntfile') ||
-            spmrc.get('user.gruntfile').indexOf('spm-alipay-suite') > 0) {
+            spmrc.get('user.gruntfile').indexOf('apm') > 0) {
           spmrc.set('user.gruntfile', path.normalize(gruntfile));
         }
         if (!spmrc.get('online-status')) {
