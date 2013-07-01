@@ -8,6 +8,8 @@ Alipay package manager, a alipay suite of tools base on spm.
 
 这是一个基于 `spm2.x` 的套件集合，你可能需要先了解下 [spm](https://github.com/spmjs/spm2/)。
 
+`apm` 会将你的 spm [默认源](http://docs.spmjs.org/en/config#source) 设为支付宝内部的 `http://yuan.alipay.im`，如果你不需要，记得重置。
+
 ## 安装
 
 ```
@@ -61,7 +63,7 @@ $ spm check
 
 - `spm check` 检查 spm 配置环境和相关插件的版本是否正确 ([文档](https://github.com/spmjs/spm-alipay-suite/#spm-check))
 
-- `spm test` 使用 phantomjs 跑测试用例，测试 src 和 dist 代码，并使用 jscoverage 生成覆盖率文档。
+- `spm test` 使用 phantomjs 跑测试用例，测试 src 和 dist 代码，并使用 jscoverage 生成覆盖率文档。`需要先用 spm doc 生成本地测试文档`
 
 - `spm totoro` 使用 totoro 跑测试用例 ([文档](https://github.com/totorojs/totoro))
 
