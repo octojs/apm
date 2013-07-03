@@ -1,5 +1,5 @@
-CMD="plugin config help info tree login search unpublish publish install cdn build deploy init status zip check test build-doc publish-doc test-src test-dist coverage"
-CMDARRAY=(plugin config help info tree login search unpublish publish install cdn build deploy init status zip check test build-doc publish-doc test-src test-dist coverage)
+CMD="plugin config help info tree login search unpublish publish install cdn build deploy init status zip check test coverage doc totoro"
+CMDARRAY=(plugin config help info tree login search unpublish publish install cdn build deploy init status zip check test coverage doc totoro)
 
 # zsh
 type compctl > /dev/null 2>&1 && compctl -k CMDARRAY spm 
