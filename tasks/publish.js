@@ -10,12 +10,14 @@ module.exports = function(grunt) {
       return;
     }
 
+    var done = this.async();
+
     var pkg = require(path.resolve('./package.json'));
     var whiteList = ['seajs', 'jquery', 'gallery', 'arale', 'alice'];
     if (pkg && whiteList.indexOf(pkg.family) === -1) {
       spm.publish({
         force: true
-      });
+      }, done);
     }
   });
 };

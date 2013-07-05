@@ -30,8 +30,7 @@ module.exports = function(grunt) {
           statusCode: 404,
           server: 'https://a.alipayobjects.com',
           onFailure: function() {
-            grunt.log.error("Above files is existed online, this version is already published!");
-            grunt.file.delete('.build');
+            grunt.log.writeln("Check files is existed online, no need to publish.");
             process.exit(0);
           }
         },
