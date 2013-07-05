@@ -2,6 +2,7 @@ module.exports = function(grunt) {
   var pkg = grunt.file.readJSON('package.json');
   grunt.initConfig({
     pkg: pkg,
+    target: grunt.option('target') || 'dev',
 
     'check-online': {
       alipay: {
@@ -21,6 +22,25 @@ module.exports = function(grunt) {
           filter: 'isFile',
           dest: '<%= pkg.family %>/<%= pkg.name %>/<%= pkg.version %>'
         }]
+      },
+
+      deploy: {
+        options: {
+          // status code should be 404
+          statusCode: 404,
+          server: 'https://a.alipayobjects.com',
+          onFailure: function() {
+            grunt.log.error("Above files is existed online, this version is already published!");
+            grunt.file.delete('.build');
+            process.exit(0);
+          }
+        },
+        files: [{
+          cwd: 'dist',
+          src: '**/*',
+          filter: 'isFile',
+          dest: '<%= pkg.family %>/<%= pkg.name %>/<%= pkg.version %>'
+        }]
       }
     },
 
@@ -30,7 +50,7 @@ module.exports = function(grunt) {
           onFailure: function() {
             grunt.file.delete('.build');
             process.exit(0);
-          } 
+          }
         },
         files: [{
           cwd: '.build/dist',
@@ -76,6 +96,27 @@ module.exports = function(grunt) {
           dest: '.build/dist'
         }]
       }
+    },
+
+    scp: {
+      options: {
+        username: grunt.option('username') || 'admin',
+        password: grunt.option('password') || 'alipaydev',
+        host: 'assets.<%= target %>.alipay.net',
+        log: function(o) {
+          var dest = o.destination.replace('/home/admin/wwwroot/assets', '');
+          var base = 'http://assets.' + (grunt.option('target') || 'dev') + '.alipay.net';
+          grunt.log.writeln('online ' + base + dest);
+        }
+      },
+      assets: {
+        files: [{
+          cwd: 'dist',
+          src: '**/*',
+          filter: 'isFile',
+          dest: '/home/admin/wwwroot/assets/<%= pkg.family %>/<%= pkg.name %>/<%= pkg.version %>'
+        }]
+      }
     }
   });
 
@@ -84,7 +125,6 @@ module.exports = function(grunt) {
   }
 
   grunt.loadGlobalTasks('apm');
-
   grunt.loadGlobalTasks('spm-build');
 
   var builder = require('spm-build');
@@ -113,7 +153,7 @@ module.exports = function(grunt) {
     'uglify:js',  // .build/tmp/*.js -> .build/dist/*.js
 
     'check-debug',
-    'check-online',
+    'check-online:alipay',
     'peaches',
 
     'clean:dist',
@@ -127,5 +167,6 @@ module.exports = function(grunt) {
     taskList.splice(taskList.indexOf('peaches'), 1);
   }
 
+  grunt.registerTask('deploy', ['scp', 'check-online:deploy', 'publish']);
   grunt.registerTask('build', taskList);
 };
