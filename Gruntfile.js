@@ -140,11 +140,12 @@ module.exports = function(grunt) {
 
     // build css
     'transport:src',  // src/* -> .build/src/*
-    'concat:css',   // .build/src/*.css -> .build/dist/*.css
+    'concat:css',   // .build/src/*.css -> .build/tmp/*.css
 
     // build js (must be invoke after css build)
-    'transport:css',  // .build/dist/*.css -> .build/src/*.css.js
+    'transport:css',  // .build/tmp/*.css -> .build/src/*.css.js
     'concat:js',  // .build/src/* -> .build/dist/*.js
+
 
     // to ./build/dist
     'copy:build',
