@@ -298,4 +298,55 @@ define('arale/widget/1.0.0/b.css', [], function() {
 });
 ```
 
+### stylus 文件
 
+暂时还没支持 less 和 sass，但原理是一样的，有需求可以支持。
+
+`stylus` 将 src 下的 styl 文件转换成 css 输出到 .build/stylus，然后再 `transport:stylus` 到 .build/src 下。
+
+之后的操作就跟 css 一样了。
+
+### handlebars 模板文件
+
+在编译的时候会将 handlebars 模板进行预编译，可提高运行时的性能。
+
+```
+// a.js
+define(function(require, exports, module){
+  require('./b.handlebars');
+  module.exports = 'a';
+});
+
+// b.handlebars
+	<ul>
+	  {{#each list}}
+	   <li>{{content}}<li>
+	  {{/each}}
+	</ul>
+```
+
+`transport:src` 进行预编译生成 b.handlebars.js
+
+```
+// a.js
+define('arale/widget/1.1.0/a', ['./b.handlebars'], function(require, exports, module){
+  require('./b.handlebars');
+  module.exports = 'a';
+});
+
+// b.handlebars.js
+define("arale/widget/1.1.0/b.handlebars", ["gallery/handlebars/1.0.2/runtime" ], function(require, exports, module) {
+    var Handlebars = require("gallery/handlebars/1.0.2/runtime");
+    ...
+});
+```
+
+接下来做 concat:js uglify:js 都与一般 js 相同。
+
+### 其他 task
+
+- spm-install：编译前需要先下载依赖
+- check-debug
+- check-online:alipay：检测生成的文件是否已发布，禁止重新编译已发布的文件。
+- peaches：合并图片
+- spm-newline：最后需要有个空行，以免 combo 有问题
