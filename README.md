@@ -151,17 +151,3 @@ $ spm doc publish
   }
 ```
 
-### styleBox
-
-样式隔离方案，具体功能见 [aliceui/aliceui.org#9](https://github.com/aliceui/aliceui.org/issues/9)
-
-在 package.json 中添加如下属性就可以启动样式隔离。spm build 时会帮你把 JS 中 require 的样式进行封装。
-
-```
-  "spm": {
-    "styleBox": true
-  }
-```
-
-> 注：需要配合 [arale/widget@1.1.0+](http://aralejs.org/widget) 进行使用。
-
