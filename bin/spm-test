@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 var runCommands = require('../lib/run-commands');
-var jsdom = require('jsdom');
-var fs = require('fs');
+var path = require('path');
 var output = '_site/coverage.html';
+var outputJSON = '_site/coverage.json';
 require('colorful').colorful();
 
 runCommands([
@@ -11,28 +11,21 @@ runCommands([
   'mocha-browser _site/tests/runner.html?dist -S',
   'rm -fr _site/src-cov',
   'jscoverage --encoding=utf8 src _site/src-cov',
-  'mocha-browser _site/tests/runner.html?cov -S -R html-cov > ' + output
+  'mocha-browser _site/tests/runner.html?cov -S -R html-cov > ' + output,
+  'mocha-browser _site/tests/runner.html?cov -S -R json-cov > ' + outputJSON
 ])(function() {
-  var html = fs.readFileSync(output);
-  var jsdom = require("jsdom").jsdom;
-  var document = jsdom(html);
-  var window = document.createWindow();
-  var $ = function(selector) {
-    return window.document.querySelectorAll(selector);
-  };
+  var covJSON = require(path.resolve(outputJSON));
 
-  var percentage = $('#stats .percentage')[0].innerHTML;
-  var sloc = $('#stats .sloc')[0].innerHTML;
+  var percentage = covJSON.coverage.toString();
+  var sloc = covJSON.sloc.toString();
   console.log('  ' + percentage.to.green + ' coverage, ' + sloc.to.green + ' sloc');
 
-  var filesNode =  $('#files .file');
-  for (var i=0; i<filesNode.length; i++) {
-    var fileName = filesNode[i].querySelectorAll('h2')[0].innerHTML;
-    var filePercentage = filesNode[i].querySelectorAll('.percentage')[0].innerHTML;
-    var fileSloc = filesNode[i].querySelectorAll('.sloc')[0].innerHTML;
+  for (var i=0; i<covJSON.files.length; i++) {
+    var fileName = covJSON.files[i].filename;
+    var filePercentage = covJSON.files[i].coverage.toString();
+    var fileSloc = covJSON.files[i].sloc.toString();
     console.log('    ' + (fileName + ': ').to.grey + filePercentage.to.green + ' coverage, '.to.grey + fileSloc.to.green + ' sloc'.to.grey);
   }
 
   console.log('  You can see more detail in ' + output.to.cyan);  
-
 });
