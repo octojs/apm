@@ -178,10 +178,7 @@ function installModule(module, version, callback) {
         skip(version + ' has been installed.');
         return;
       }
-    } catch(e) {
-      skip(e);
-      return;
-    }
+    } catch(e) { }
   }
   console.log(('  Installing npm module ' + module + '@' + version).green);
   runCommands([
