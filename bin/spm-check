@@ -21,7 +21,7 @@ var paths = process.env.PATH.split(isWindows ? ';' : ':');
 // e.g. /usr/local/bin/node
 var nodeFile;
 var p = paths.filter(function(element) {
-  return fs.existsSync(path.join(element, 'node'));
+  return fs.existsSync(path.join(element, isWindows?'node.exe':'node'));
 });
 if (p.length) {
   // process.execPath
