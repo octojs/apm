@@ -146,7 +146,6 @@ module.exports = function(grunt) {
     'transport:css',  // .build/tmp/*.css -> .build/src/*.css.js
     'concat:js',  // .build/src/* -> .build/dist/*.js
 
-
     // to ./build/dist
     'copy:build',
     'cssmin:css',   // .build/tmp/*.css -> .build/dist/*.css
