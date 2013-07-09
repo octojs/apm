@@ -2,13 +2,10 @@
 
 ---
 
-## 0.3.3
+## 0.3.2
 
 - 去掉对 jsdom 的依赖，因为这货在 window 下的安装需要 python 环境。
 - 增加 mocha-browser 到 deps.json 中。
-
-## 0.3.2
-
 - 提升 check-debug 的速度
 - 修复一个 https 下 spm-status 失效的[问题](https://github.com/brianc/node-postgres/issues/314)
 
