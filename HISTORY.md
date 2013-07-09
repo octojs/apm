@@ -5,6 +5,7 @@
 ## 0.3.3
 
 - 去掉对 jsdom 的依赖，因为这货在 window 下的安装需要 python 环境。
+- 增加 mocha-browser 到 deps.json 中。
 
 ## 0.3.2
 
