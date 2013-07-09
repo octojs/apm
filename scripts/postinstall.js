@@ -199,7 +199,7 @@ function gitInstall(url, dest, callback) {
   dest = dest.replace('~', spmrc.get('user.home'));
   if (!fs.existsSync(dest)) {
     console.log(('  Installing ' + url + ' to ' + dest).green);
-    command = 'git clone ' + url + dest;
+    command = 'git clone ' + url + ' ' + dest;
   } else {
     console.log(('  Updating ' + url + ' to ' + dest).green);
     command = {
