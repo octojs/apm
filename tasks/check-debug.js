@@ -7,8 +7,6 @@ module.exports = function(grunt) {
       onFailure: null
     });
 
-    var done = this.async();
-
     var distfiles = [];
     this.files.forEach(function(fileObj) {
       fileObj.src.forEach(function(filepath) {
@@ -26,14 +24,9 @@ module.exports = function(grunt) {
               grunt.log.error(filepath + ' has "-debug-debug" words.');
               grunt.log.error('There is debug denpendency in your code!');
               options.onFailure && options.onFailure();
-              done(false);
           }
         }
-
       });
     });
-    
-    done();
-
   });
 };

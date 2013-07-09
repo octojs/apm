@@ -2,6 +2,10 @@
 
 ---
 
+## 0.3.2
+
+- 提升 check-debug 的速度
+
 ## 0.3.1
 
 - deploy 时默认 publish 到源上
