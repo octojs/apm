@@ -5,6 +5,7 @@
 ## 0.3.2
 
 - 提升 check-debug 的速度
+- 修复一个 https 下 spm-status 失效的[问题](https://github.com/brianc/node-postgres/issues/314)
 
 ## 0.3.1
 

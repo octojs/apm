@@ -2,7 +2,7 @@
   "spm": "2.1.6",
   "spm-init": "0.4.7",
   "spm-build": "0.3.6",
-  "spm-status": "0.2.1",
+  "spm-status": "0.2.2",
   "spm-deploy": "0.2.0",
   "spm-grunt": "0.1.6",
   "spm-doc": "0.2.5",
