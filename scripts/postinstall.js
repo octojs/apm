@@ -128,30 +128,36 @@ async.waterfall([
       async.waterfall(tasks, callback);
     },
     function(callback) {
-      console.log();
-      console.log('Installing spm completion.'.cyan);
+      var isWindows = process.platform === 'win32';
 
-      runCommands([
-        ['cp', path.join(__dirname, '.spm_completion'), spmrc.get('user.home')].join(' ')
-      ])(function() {
-        var text = '\n. ~/.spm_completion';
-        var bashFile = spmrc.get('user.home') + '/.bash_profile';
-        var zshFile = spmrc.get('user.home') + '/.zshrc';
-
-        var files = [bashFile, zshFile];
-        for(var i in files) {
-          var file = files[i];
-          if (fs.existsSync(file)) {
-            var result = fs.readFileSync(file).toString();
-            if (!/spm_completion/.test(result)) {
-              fs.writeFileSync(file, result + text);
-            }
-          } else {
-            fs.writeFileSync(file, text);
-          }
-        }
+      if (isWindows) {
         callback();
-      });
+      } else {
+        console.log();
+        console.log('Installing spm completion.'.cyan);
+
+        runCommands([
+          ['cp', path.join(__dirname, '.spm_completion'), spmrc.get('user.home')].join(' ')
+        ])(function() {
+          var text = '\n. ~/.spm_completion';
+          var bashFile = spmrc.get('user.home') + '/.bash_profile';
+          var zshFile = spmrc.get('user.home') + '/.zshrc';
+
+          var files = [bashFile, zshFile];
+          for(var i in files) {
+            var file = files[i];
+            if (fs.existsSync(file)) {
+              var result = fs.readFileSync(file).toString();
+              if (!/spm_completion/.test(result)) {
+                fs.writeFileSync(file, result + text);
+              }
+            } else {
+              fs.writeFileSync(file, text);
+            }
+          }
+          callback();
+        });
+      }
     }
 ],
 // optional callback
