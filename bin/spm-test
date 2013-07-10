@@ -15,13 +15,13 @@ runCommands([
 ])(function() {
   var covJSON = require(path.resolve(outputJSON));
 
-  var percentage = covJSON.coverage.toString();
+  var percentage = parseInt(covJSON.coverage, 10) + '%';
   var sloc = covJSON.sloc.toString();
   console.log('  ' + percentage.to.green + ' coverage, ' + sloc.to.green + ' sloc');
 
   for (var i=0; i<covJSON.files.length; i++) {
     var fileName = covJSON.files[i].filename;
-    var filePercentage = covJSON.files[i].coverage.toString();
+    var filePercentage = parseInt(covJSON.files[i].coverage, 10)  + '%';
     var fileSloc = covJSON.files[i].sloc.toString();
     console.log('    ' + (fileName + ': ').to.grey + filePercentage.to.green + ' coverage, '.to.grey + fileSloc.to.green + ' sloc'.to.grey);
   }
