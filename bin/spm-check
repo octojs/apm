@@ -33,10 +33,16 @@ if (p.length) {
 
 // e.g. /usr/local
 var installDir = path.join(nodeFile, '..').replace(/[\\|\/]bin/, '');
-// e.g. /usr/local/bin
-var binDir = path.join(installDir, 'bin');
 // e.g. /usr/local/lib/node_modules
 var nodepath = __dirname.replace(/(\/|\\)apm(\/|\\)bin$/, '');
+var binDir;
+if (isWindows) {
+  // e.g. C:\Users\xxx\AppData\Roaming\npm
+  binDir = __dirname.replace(/\\node_modules\\apm\\bin$/, '');
+} else {
+  // e.g. /usr/local/bin
+  binDir = __dirname.replace(/lib\/node_modules\/apm\/bin$/, 'bin');
+}
 
 /*
   Check environment
