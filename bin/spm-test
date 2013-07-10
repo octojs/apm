@@ -11,8 +11,7 @@ runCommands([
   'mocha-browser _site/tests/runner.html?dist -S',
   'rm -fr _site/src-cov',
   'jscoverage --encoding=utf8 src _site/src-cov',
-  'mocha-browser _site/tests/runner.html?cov -S -R html-cov > ' + output,
-  'mocha-browser _site/tests/runner.html?cov -S -R json-cov > ' + outputJSON
+  'mocha-browser _site/tests/runner.html?cov -R html-cov -o ' + outputJSON +' > ' + output,
 ])(function() {
   var covJSON = require(path.resolve(outputJSON));
 
