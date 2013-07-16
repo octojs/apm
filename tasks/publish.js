@@ -16,7 +16,8 @@ module.exports = function(grunt) {
     var whiteList = ['seajs', 'jquery', 'gallery', 'arale', 'alice'];
     if (pkg && whiteList.indexOf(pkg.family) === -1) {
       spm.publish({
-        force: true
+        force: true,
+        tarball: true
       }, done);
     }
   });
