@@ -1,5 +1,5 @@
 {
-  "spm": "2.1.6",
+  "spm": "2.1.7",
   "spm-init": "0.4.7",
   "spm-build": "0.3.6",
   "spm-status": "0.2.2",
@@ -8,7 +8,7 @@
   "spm-doc": "0.2.6",
   "cdn": "0.1.5",
   "checkurl": "0.2.1",
-  "apm": "0.3.2",
+  "apm": "0.3.3",
   "totoro": "0.2.3",
   "mocha-browser": "0.1.2",
   "jscoverage": "0.3.7"
