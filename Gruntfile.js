@@ -131,6 +131,7 @@ module.exports = function(grunt) {
 
   var taskList = [
     'clean:build', // delete build direcotry first
+    'check-system',
 
     'spm-install', // install dependencies
 
