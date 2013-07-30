@@ -8,6 +8,11 @@ module.exports = function(grunt) {
     var pkg = require(path.resolve('./package.json'));
     var done = this.async();
 
+    // svn 不存在的情况马上返回
+    info.on('error', function() {
+      done();
+    });
+
     info.stdout.on('data', function (data) {
       outStr += data.toString();
     });
