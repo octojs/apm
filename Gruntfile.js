@@ -73,10 +73,33 @@ module.exports = function(grunt) {
       }
     },
 
+    less: {
+      compile: {
+        files: [{
+          cwd: 'src',
+          src: '**/*.less',
+          expand: true,
+          ext: '.css',
+          dest: '.build/less/'
+        }],
+        options: {
+          compress: false
+        }
+      }
+    },
+
     transport: {
       stylus: {
         files: [{
           cwd: '.build/stylus',
+          src: '**/*',
+          filter: 'isFile',
+          dest: '.build/src'
+        }]
+      },
+      less: {
+        files: [{
+          cwd: '.build/less',
           src: '**/*',
           filter: 'isFile',
           dest: '.build/src'
@@ -139,6 +162,10 @@ module.exports = function(grunt) {
     'stylus', // src/*.styl -> .build/stylus/*.css
     'transport:stylus', // .build/stylus/*.css -> .build/src/*.css
 
+    // build less
+    'less', // src/*.less -> .build/less/*.css
+    'transport:less', // .build/less/*.css -> .build/src/*.css
+
     // build css
     'transport:src',  // src/* -> .build/src/*
     'concat:css',   // .build/src/*.css -> .build/tmp/*.css
@@ -169,4 +196,5 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', ['scp', 'check-online:deploy', 'publish']);
   grunt.registerTask('build', taskList);
+
 };
