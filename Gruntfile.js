@@ -150,7 +150,16 @@ module.exports = function(grunt) {
   grunt.loadGlobalTasks('spm-build');
 
   var builder = require('spm-build');
-  grunt.util._.merge(grunt.config.data, builder.config);
+  var options = builder.parseOptions();
+  if (options.pkg.spm && options.pkg.spm.output) {
+    options.pkg.spm.output = options.pkg.spm.output.map(function(item) {
+      item = item.replace(/\.less$/, '.css');
+      item = item.replace(/\.styl/, '.css');
+      return item
+    });
+  }
+  var config = builder.getConfig(options);
+  grunt.util._.merge(grunt.config.data, config);
 
   var taskList = [
     'clean:build', // delete build direcotry first
