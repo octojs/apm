@@ -139,7 +139,23 @@ module.exports = function(grunt) {
           dest: '/home/admin/wwwroot/assets/<%= pkg.family %>/<%= pkg.name %>/<%= pkg.version %>'
         }]
       }
+    },
+
+    watch: {
+      options: {
+        dateFormat: function(time) {
+          grunt.log.writeln('Finished in ' + time + 'ms at ' +
+            (new Date()).toString());
+          grunt.log.writeln('Waiting for more changes...');
+        },
+        spawn: false
+      },
+      scripts: {
+        files: ['src/**/*.js', 'package.json'],
+        tasks: ['build', 'scp']
+      }
     }
+
   });
 
   if (!grunt.loadGlobalTasks) {

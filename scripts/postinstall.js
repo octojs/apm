@@ -44,6 +44,12 @@ async.waterfall([
           binary: 'spm-zip',
           description: 'create a zip ball'
         });
+        console.log(' Installing spm plugin spm-watch.'.green);        
+        spm.plugin.install({
+          name: 'watch',
+          binary: 'spm-watch',
+          description: 'Deploy automaticly when you change local files'
+        });
         console.log(' Installing spm plugin spm-check.'.green);        
         spm.plugin.install({
           name: 'check',

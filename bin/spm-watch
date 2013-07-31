@@ -1,0 +1,37 @@
+#!/usr/bin/env node
+
+var commander = require('commander');
+
+commander.usage('[options]');
+commander.version(require('../package').version);
+
+commander
+  .option('--target <target>', 'target server name')
+  .option('--username <username>', 'the username of the server')
+  .option('--password <pass>', 'the password of the server')
+  .option('-v, --verbose', 'show more logs');
+
+commander.on('--help', function() {
+  console.log();
+  console.log('  Examples:');
+  console.log();
+  console.log('   $ spm watch');
+  console.log('   $ spm watch --target d236');
+});
+
+commander.parse(process.argv);
+
+// run install
+console.log();
+
+var options = {};
+options.target = commander.target;
+options.username = commander.username;
+options.verbose = commander.verbose;
+if (typeof commander.password === 'string') {
+  options.password = commander.password;
+}
+
+var grunt = require('spm-grunt');
+
+grunt.invokeTask('watch', options);
