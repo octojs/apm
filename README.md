@@ -2,7 +2,7 @@
 
 Alipay package manager, a alipay suite of tools base on spm.
 
-> 0.3.0 版本后 spm-alipay-suite 改名为 apm.
+> 0.3.0 版本后 apm 改名为 apm.
 
 ---
 
@@ -42,7 +42,7 @@ $ spm check
 
 - spm 包管理工具 ([文档](http://docs.spmjs.org/en/index))
 
-- `spm build` 构建插件([文档](https://github.com/spmjs/spm-alipay-suite/blob/master/docs/spm-build.md))，
+- `spm build` 构建插件([文档](https://github.com/spmjs/apm/blob/master/docs/spm-build.md))，
    根据源码和 package.json 来构建标准的 CMD 模块。
 
   * stylus 编译功能（当 src 目录中有 *.styl 文件时，`spm build` 会自动构建出对应的 css 文件）
@@ -53,15 +53,17 @@ $ spm check
 
   * [peaches](http://peaches.io) 构建时自动合并雪碧图片。
 
-- `spm deploy` 部署插件 ([文档](https://github.com/spmjs/spm-alipay-suite/#spm-deploy))
+- `spm deploy` 部署插件 ([文档](https://github.com/spmjs/apm/#spm-deploy))
+
+- `spm watch` 监听文件修改自动部署插件。 ([文档](https://github.com/spmjs/apm/#spm-watch))
 
 - `spm init` 初始化插件以及 Arale 和 Alice 的初始化模板 ([文档](https://github.com/spmjs/spm-init/blob/master/README-zh.md))
 
-- `spm status` 模块发布状态检测插件 ([文档](https://github.com/spmjs/spm-alipay-suite/#spm-status))
+- `spm status` 模块发布状态检测插件 ([文档](https://github.com/spmjs/apm/#spm-status))
 
-- `spm zip` 打成 zip 包 ([文档](https://github.com/spmjs/spm-alipay-suite/#spm-zip))
+- `spm zip` 打成 zip 包 ([文档](https://github.com/spmjs/apm/#spm-zip))
 
-- `spm check` 检查 spm 配置环境和相关插件的版本是否正确 ([文档](https://github.com/spmjs/spm-alipay-suite/#spm-check))
+- `spm check` 检查 spm 配置环境和相关插件的版本是否正确 ([文档](https://github.com/spmjs/apm/#spm-check))
 
 - `spm test` 使用 phantomjs 跑测试用例，测试 src 和 dist 代码，并使用 jscoverage 生成覆盖率文档。`需要先用 spm doc 生成本地测试文档`
 
@@ -94,7 +96,11 @@ $ spm check
 
 执行 `spm deploy` 将 dist 目录下的文件部署到静态服务器，默认部署到 http://assets.dev.alipay.net。
 
-如果要部署到某台服务器，执行 `spm deploy --target p631`。
+如果要部署到某台服务器，执行
+
+```
+$ spm deploy --target p631
+```
 
 如果要指定服务器密码，执行 `spm deploy --password admin`。
 
@@ -103,6 +109,16 @@ $ spm check
 ```
 $ spm deploy arale/base
 $ spm deploy arale/base@1.0.0
+```
+
+### spm watch
+
+方便的本地调试工具，监听本地 src 里的源文件和 package.json 的改动，并自动部署到指定服务器的插件。
+默认部署到 http://assets.dev.alipay.net。
+
+```
+$ spm watch
+$ spm watch --target p631
 ```
 
 ### spm status
