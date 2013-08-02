@@ -3,6 +3,7 @@
 var fs = require('fs');
 var path = require('path');
 var spawn = require('win-spawn');
+var runCommands = require('../lib/run-commands');
 require('colorful').colorful();
 
 var args = process.argv.slice();
@@ -31,8 +32,13 @@ if (i > -1) {
 
 if (!fs.existsSync(path.resolve(runner))) {
   console.log();
-  console.log(runner + ' not exist. You should run ' + 'make build-doc'.to.cyan.bold.color + ' or ' + 'nico build'.to.cyan.bold.color);
+  console.log(runner + ' not exist. You should run ' + 'spm doc build'.to.cyan.bold.color + ' or ' + 'nico build'.to.cyan.bold.color);
   process.exit(1);
 }
 
-spawn('totoro', args, { stdio: 'inherit'});
+runCommands([
+  'spm doc build',
+  'totoro '+args.join(' ')
+])(function() {
+
+});
