@@ -7,6 +7,7 @@ var outputJSON = '_site/coverage.json';
 require('colorful').colorful();
 
 runCommands([
+  'spm doc build',
   'mocha-browser _site/tests/runner.html -S',
   'mocha-browser _site/tests/runner.html?dist -S',
   'rm -fr _site/src-cov',
@@ -26,5 +27,5 @@ runCommands([
     console.log('    ' + (fileName + ': ').to.grey + filePercentage.to.green + ' coverage, '.to.grey + fileSloc.to.green + ' sloc'.to.grey);
   }
 
-  console.log('  You can see more detail in ' + output.to.cyan);  
+  console.log('  You can see more detail in ' + output.to.cyan);
 });
