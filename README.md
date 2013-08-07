@@ -121,6 +121,8 @@ $ spm watch
 $ spm watch --target p631
 ```
 
+[相关讨论](https://github.com/spmjs/apm/issues/36)
+
 ### spm status
 
 检查某个模块的发布状态，包括 dev、test、和线上三个环境。
