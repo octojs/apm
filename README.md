@@ -121,6 +121,25 @@ $ spm watch
 $ spm watch --target p631
 ```
 
+原来的开发过程是：
+
+```
+修改文件 -> spm build -> spm deploy
+修改文件 -> spm build -> spm deploy
+修改文件 -> spm build -> spm deploy
+....
+```
+
+现在的开发过程可以是：
+
+```
+spm watch
+修改文件
+修改文件
+修改文件
+....
+```
+
 [相关讨论](https://github.com/spmjs/apm/issues/36)
 
 ### spm status
