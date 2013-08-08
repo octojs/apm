@@ -151,7 +151,15 @@ module.exports = function(grunt) {
         spawn: false
       },
       scripts: {
-        files: ['src/**/*', 'package.json'],
+        files: ['src/**/*.js',
+                'src/**/*.css',
+                'src/**/*.less',
+                'src/**/*.styl',
+                'src/**/*.tpl',
+                'src/**/*.handlerbars',
+                'src/**/*.html',
+                'src/**/*.json',
+                'package.json'],
         tasks: ['build', 'scp']
       }
     }
