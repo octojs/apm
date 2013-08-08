@@ -2,7 +2,7 @@
 
 Alipay package manager, a alipay suite of tools base on spm.
 
-> 0.3.0 版本后 apm 改名为 apm.
+> 0.3.0 版本后 spm-alipay-suite 改名为 apm.
 
 ---
 
