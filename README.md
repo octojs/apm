@@ -2,13 +2,17 @@
 
 Alipay package manager, a alipay suite of tools base on spm.
 
-> 0.3.0 版本后 apm 改名为 apm.
+> 0.3.0 版本后 spm-alipay-suite 改名为 apm.
 
 ---
 
 这是一个基于 `spm2.x` 的套件集合，你可能需要先了解下 [spm](https://github.com/spmjs/spm2/)。
 
-`apm` 会将你的 spm [默认源](http://docs.spmjs.org/en/config#source) 设为支付宝内部的 `http://yuan.alipay.im`，如果你不需要，记得重置。
+`apm` 会将你的 spm [默认源](http://docs.spmjs.org/en/config#source) 设为支付宝内部的 `http://yuan.alipay.im`，外网是无法访问的，如果你不需要，记得重置。
+
+```
+$ spm config source.default.url https://spmjs.org
+```
 
 ## 安装
 
