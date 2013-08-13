@@ -1,5 +1,7 @@
 module.exports = function(grunt) {
+
   var pkg = grunt.file.readJSON('package.json');
+
   grunt.initConfig({
     pkg: pkg,
     target: grunt.option('target') || 'dev',
@@ -109,9 +111,7 @@ module.exports = function(grunt) {
 
     peaches: {
       sprite: {
-        options: {
-          beautify: false
-        },
+        options: pkg.spm.peaches,
         files: [{
           cwd: '.build/dist',
           src: '**/*.css',
