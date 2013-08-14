@@ -1,10 +1,15 @@
 # APM
 
+[![NPM version](https://badge.fury.io/js/apm.png)](http://badge.fury.io/js/apm)
+[![David Status](https://david-dm.org/spmjs/apm.png)](https://david-dm.org/spmjs/apm)
+
 Alipay package manager, a alipay suite of tools base on spm.
 
-> 0.3.0 版本后 spm-alipay-suite 改名为 apm.
+> 0.3.0 版本后原 `spm-alipay-suite` 改名为 `apm`.
 
 ---
+
+## 特别说明
 
 这是一个基于 `spm2.x` 的套件集合，你可能需要先了解下 [spm](https://github.com/spmjs/spm2/)。
 
