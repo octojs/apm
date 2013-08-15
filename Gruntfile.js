@@ -227,7 +227,7 @@ module.exports = function(grunt) {
     taskList.splice(taskList.indexOf('peaches'), 1);
   }
 
-  grunt.registerTask('deploy', ['scp', 'check-online:deploy', 'publish']);
+  grunt.registerTask('deploy', ['scp', 'delete-deploy-file', 'check-online:deploy', 'publish']);
   grunt.registerTask('build', taskList);
 
 };
