@@ -9,6 +9,6 @@
   "checkurl": "0.2.2",
   "totoro": "0.3.0",
   "mocha-browser": "0.1.2",
-  "phantomjs": "1.9.1",
+  "phantomjs": "1.9.1-5",
   "jscoverage": "0.3.7"
 }
