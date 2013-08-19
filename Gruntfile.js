@@ -156,7 +156,7 @@ module.exports = function(grunt) {
                 'src/**/*.less',
                 'src/**/*.styl',
                 'src/**/*.tpl',
-                'src/**/*.handlerbars',
+                'src/**/*.handlebars',
                 'src/**/*.html',
                 'src/**/*.json',
                 'package.json'],
@@ -179,7 +179,7 @@ module.exports = function(grunt) {
     options.pkg.spm.output = options.pkg.spm.output.map(function(item) {
       item = item.replace(/\.less$/, '.css');
       item = item.replace(/\.styl/, '.css');
-      return item
+      return item;
     });
   }
   var config = builder.getConfig(options);
