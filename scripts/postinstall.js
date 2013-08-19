@@ -6,7 +6,7 @@ var path = require('path');
 var spmrc = require('spmrc');
 var semver = require('semver');
 var runCommands = require('../lib/run-commands');
-var async = require('async')
+var async = require('async');
 var deps = require('./deps.json');
 require('colorful').toxic();
 
@@ -44,25 +44,25 @@ async.waterfall([
           binary: 'spm-zip',
           description: 'create a zip ball'
         });
-        console.log(' Installing spm plugin spm-watch.'.green);        
+        console.log(' Installing spm plugin spm-watch.'.green);
         spm.plugin.install({
           name: 'watch',
           binary: 'spm-watch',
           description: 'Deploy automaticly when you change local files'
         });
-        console.log(' Installing spm plugin spm-check.'.green);        
+        console.log(' Installing spm plugin spm-check.'.green);
         spm.plugin.install({
           name: 'check',
           binary: 'spm-check',
           description: 'check environment'
         });
-        console.log(' Installing spm plugin spm-test.'.green);        
+        console.log(' Installing spm plugin spm-test.'.green);
         spm.plugin.install({
           name: 'test',
           binary: 'spm-test',
           description: 'test your code in local by phantomjs'
         });
-        console.log(' Installing spm plugin spm-totoro.'.green);        
+        console.log(' Installing spm plugin spm-totoro.'.green);
         spm.plugin.install({
           name: 'totoro',
           binary: 'spm-totoro',
@@ -120,7 +120,7 @@ async.waterfall([
       tasks.push(function(done) {
         gitInstall('git://github.com/aralejs/template-arale.git', '~/.spm/init/arale', done);
       });
-      tasks.push(function(done) {      
+      tasks.push(function(done) {
         gitInstall('git://github.com/aralejs/template-alice.git', '~/.spm/init/alice', done);
       });
       tasks.push(function(done) {
@@ -146,19 +146,20 @@ async.waterfall([
           ['cp', path.join(__dirname, '.spm_completion'), spmrc.get('user.home')].join(' ')
         ])(function() {
           var text = '\n. ~/.spm_completion';
-          var bashFile = spmrc.get('user.home') + '/.bash_profile';
-          var zshFile = spmrc.get('user.home') + '/.zshrc';
+          var profile = spmrc.get('user.home') + '/.profile';
+          var bashRc = spmrc.get('user.home') + '/.bashrc';
+          var bashProfile = spmrc.get('user.home') + '/.bash_profile';
+          var zshRc = spmrc.get('user.home') + '/.zshrc';
 
-          var files = [bashFile, zshFile];
-          for(var i in files) {
-            var file = files[i];
-            if (fs.existsSync(file)) {
-              var result = fs.readFileSync(file).toString();
-              if (!/spm_completion/.test(result)) {
-                fs.writeFileSync(file, result + text);
-              }
-            } else {
-              fs.writeFileSync(file, text);
+          if (process.env.SHELL === '/bin/zsh') {
+            writeProfile(zshRc, text);
+          } else {
+            if (fs.existsSync(profile)) {
+              writeProfile(profile, text);
+            } else if (fs.existsSync(bashRc)) {
+              writeProfile(bashRc, text);
+            } else if (fs.existsSync(bashProfile)) {
+              writeProfile(bashProfile, text);
             }
           }
           callback();
@@ -217,4 +218,15 @@ function gitInstall(url, dest, callback) {
     };
   }
   runCommands([command])(callback);
+}
+
+function writeProfile (file, text) {
+  if (fs.existsSync(file)) {
+    var result = fs.readFileSync(file).toString();
+    if (!/spm_completion/.test(result)) {
+      fs.writeFileSync(file, result + text);
+    }
+  } else {
+    fs.writeFileSync(file, text);
+  }
 }
