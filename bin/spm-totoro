@@ -12,7 +12,7 @@ var args = process.argv.slice();
   remove prefix command like spm-totoro
 */
 
-while (args[0] && !/test$/.test(args[0])) {
+while (args[0] && !/totoro$/.test(args[0])) {
   args.shift();
 }
 args.shift();
