@@ -2,10 +2,11 @@
 
 ---
 
-## 0.4.1 开发中
+## 0.4.1
 
 - 修复 checkurl 和 spm status 检测开发环境静态文件 404 的问题。
 - 修复 *.handlebars 文件无法使用 spm watch 的问题
+- 修复 cdn 和 peaches 的上传图片功能
 
 ## 0.4.0
 
