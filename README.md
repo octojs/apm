@@ -61,6 +61,8 @@ $ spm check
 
   * stylus 编译功能（当 src 目录中有 *.styl 文件时，`spm build` 会自动构建出对应的 css 文件）
 
+  * styleBox 样式隔离功能。在 package.json 中加入 `"spm": { "styleBox": true}` 后，继承 arale/widget@1.1.0+ 的模块打包时，内嵌的模板和样式将会隔离样式命名空间。
+
   * check-online 构建时检测该模块是否已发到线上。
 
   * check-debug 构建时检测是否打包了 xxx-debug 的依赖。
@@ -86,9 +88,9 @@ $ spm check
 - `spm doc` 文档管理工具。
 
   * `spm doc build` 生成文档到 _site 目录下。
-  
+
   * `spm doc server` 在 _site 目录启动一个服务用于调试文档。
-  
+
   * `spm doc watch` 在 _site 目录启动一个服务用于调试，并监听源码改动，实时刷新。
 
   * `spm doc publish` 将文档发布到源上。
