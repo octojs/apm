@@ -65,6 +65,17 @@ module.exports = function(grunt) {
         files: [{
           cwd: 'src',
           src: '**/*.styl',
+          filter: function(file) {
+            // 只编译需要 output 的文件
+            if (!pkg.spm || !pkg.spm.output) {
+              return;
+            }
+            for (var i=0; i<pkg.spm.output.length; i++) {
+              if (this.cwd + '/' + pkg.spm.output[i].replace(/\.css$/, '.styl') === file) {
+                return true;
+              }
+            }
+          },
           expand: true,
           ext: '.css',
           dest: '.build/stylus/'
@@ -80,6 +91,17 @@ module.exports = function(grunt) {
         files: [{
           cwd: 'src',
           src: '**/*.less',
+          filter: function(file) {
+            // 只编译需要 output 的文件
+            if (!pkg.spm || !pkg.spm.output) {
+              return;
+            }
+            for (var i=0; i<pkg.spm.output.length; i++) {
+              if (this.cwd + '/' + pkg.spm.output[i].replace(/\.css$/, '.less') === file) {
+                return true;
+              }
+            }
+          },
           expand: true,
           ext: '.css',
           dest: '.build/less/'
