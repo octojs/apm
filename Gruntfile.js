@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
 
   var pkg = grunt.file.readJSON('package.json');
+  var path = require('path');
 
   grunt.initConfig({
     pkg: pkg,
@@ -71,7 +72,7 @@ module.exports = function(grunt) {
               return;
             }
             for (var i=0; i<pkg.spm.output.length; i++) {
-              if (this.cwd + '/' + pkg.spm.output[i].replace(/\.css$/, '.styl') === file) {
+              if (path.join(this.cwd, pkg.spm.output[i].replace(/\.css$/, '.styl')) === file) {
                 return true;
               }
             }
@@ -97,7 +98,7 @@ module.exports = function(grunt) {
               return;
             }
             for (var i=0; i<pkg.spm.output.length; i++) {
-              if (this.cwd + '/' + pkg.spm.output[i].replace(/\.css$/, '.less') === file) {
+              if (path.join(this.cwd, pkg.spm.output[i].replace(/\.css$/, '.less')) === file) {
                 return true;
               }
             }
