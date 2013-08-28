@@ -2,6 +2,11 @@
 
 ---
 
+## 0.4.3
+
+- 修复 spm test 在 windows 下的问题
+- 升级 mocha-browser 的依赖
+
 ## 0.4.2
 
 - 只处理要输出的 styl 和 less 文件
