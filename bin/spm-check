@@ -77,7 +77,13 @@ assert(hasPath,
 
 if (/node_modules$/.test(nodepath) && !fs.existsSync(path.join(nodepath, '.bin'))) {
   // check NODE_PATH
-  assert(process.env.NODE_PATH && process.env.NODE_PATH === nodepath,
+
+  // win32 c:\ or C:\
+  var np = process.env.NODE_PATH.replace(/^([a-z]:)(.*)$/, function(match, disk, rest) {
+    return dist.toUpperCase() + rest;
+  });
+
+  assert(np === nodepath,
     'NODE_PATH ' + nodepath + ' is specified',
     'NODE_PATH should be ' + nodepath.to.red.bold.color
     );
