@@ -10,7 +10,7 @@ runCommands([
   'spm doc build',
   'mocha-browser _site/tests/runner.html -S',
   'mocha-browser _site/tests/runner.html?dist -S',
-  'rm -fr _site/src-cov',
+  'rm -fr ' + path.join('_site', 'src-cov'),
   'jscoverage --encoding=utf8 src _site/src-cov',
   'mocha-browser _site/tests/runner.html?cov -R html-cov -o ' + outputJSON +' > ' + output,
 ])(function() {
