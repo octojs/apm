@@ -116,14 +116,16 @@ module.exports = function(grunt) {
     transport: {
       stylus: {
         files: [{
-          src: '.build/stylus/',
+          cwd: '.build/stylus',
+          src: '**/*',
           filter: 'isFile',
           dest: '.build/src'
         }]
       },
       less: {
         files: [{
-          src: '.build/less/',
+          cwd: '.build/less',
+          src: '**/*',
           filter: 'isFile',
           dest: '.build/src'
         }]
