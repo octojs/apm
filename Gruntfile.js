@@ -115,6 +115,10 @@ module.exports = function(grunt) {
 
     transport: {
       stylus: {
+        options: {
+          styleBox: pkg.spm.styleBox,
+          alias: pkg.spm.alias || {}
+        },
         files: [{
           cwd: '.build/stylus',
           src: '**/*',
@@ -123,6 +127,10 @@ module.exports = function(grunt) {
         }]
       },
       less: {
+        options: {
+          styleBox: pkg.spm.styleBox,
+          alias: pkg.spm.alias || {}
+        },
         files: [{
           cwd: '.build/less',
           src: '**/*',
