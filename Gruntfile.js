@@ -116,16 +116,14 @@ module.exports = function(grunt) {
     transport: {
       stylus: {
         files: [{
-          cwd: '.build/stylus',
-          src: '**/*',
+          src: '.build/stylus/',
           filter: 'isFile',
           dest: '.build/src'
         }]
       },
       less: {
         files: [{
-          cwd: '.build/less',
-          src: '**/*',
+          src: '.build/less/',
           filter: 'isFile',
           dest: '.build/src'
         }]
@@ -241,7 +239,6 @@ module.exports = function(grunt) {
 
     'clean:dist',
     'copy:dist',  // .build/dist -> dist
-    'clean:build',
 
     'spm-newline'
   ];
