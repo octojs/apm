@@ -59,7 +59,9 @@ $ spm check
 - `spm build` 构建插件([文档](https://github.com/spmjs/apm/blob/master/docs/spm-build.md))，
    根据源码和 package.json 来构建标准的 CMD 模块。
 
-  * stylus 编译功能（当 src 目录中有 *.styl 文件时，`spm build` 会自动构建出对应的 css 文件）
+  * stylus 编译功能（当 src 目录中有要输出 *.styl 文件时，`spm build` 会自动构建出对应的 css 文件）
+  
+  * less 编译功能（当 src 目录中有要输出 *.less 文件时，`spm build` 会自动构建出对应的 css 文件）
 
   * styleBox 样式隔离功能。在 package.json 中加入 `"spm": { "styleBox": true}` 后，继承 arale/widget@1.1.0+ 的模块打包时，内嵌的模板和样式将会隔离样式命名空间。
 
