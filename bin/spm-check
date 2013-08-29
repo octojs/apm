@@ -89,9 +89,9 @@ if (/node_modules$/.test(nodepath) && !fs.existsSync(path.join(nodepath, '.bin')
     );
 
   // check node and modules in same directory
-  assert(nodepath === path.join(installDir, 'lib', 'node_modules'),
-    'nodeFile(' + nodeFile + ') and modules(' + nodepath + ') is in same directory',
-    'nodeFile(' + nodeFile.to.red.bold.color + ') and modules(' + nodepath.to.red.bold.color + ') is not in same directory');
+  //assert(nodepath === path.join(installDir, 'lib', 'node_modules'),
+  //  'nodeFile(' + nodeFile + ') and modules(' + nodepath + ') is in same directory',
+  //  'nodeFile(' + nodeFile.to.red.bold.color + ') and modules(' + nodepath.to.red.bold.color + ') is not in same directory');
 }
 
 
@@ -108,6 +108,12 @@ checkSpmrc('source.default.url', 'http://yuan.alipay.im');
 checkSpmrc('source.spmjs.url', 'https://spmjs.org');
 checkSpmrc('source.alipay.url', 'http://yuan.alipay.im');
 
+/*
+  Show apm version
+*/
+var p = path.join(process.env.NODE_PATH, 'apm');
+var pkg = require(path.join(p, 'package.json'));
+assert(pkg.version, 'Apm version is ' + pkg.version);
 
 /*
   Check module version
