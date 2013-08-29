@@ -239,6 +239,7 @@ module.exports = function(grunt) {
 
     'clean:dist',
     'copy:dist',  // .build/dist -> dist
+    'clean:build',
 
     'spm-newline'
   ];
