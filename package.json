@@ -26,7 +26,7 @@
     "commander": "~2.0.0",
     "spmrc": "~0.1.3",
     "grunt-check-online": "~0.1.2",
-    "grunt-contrib-stylus": "~0.8.0",
+    "grunt-contrib-stylus": "~0.7.0",
     "grunt-contrib-less": "~0.7.0",
     "grunt-contrib-watch": "~0.5.1",
     "grunt-peaches": "~0.2.0",
