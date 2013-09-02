@@ -2,17 +2,17 @@
   "name": "apm",
   "description": "Alipay package manager, a alipay suite of tools base on spm.",
   "version": "0.4.2",
-  "homepage": "https://github.com/spmjs/spm-alipay-suite",
+  "homepage": "https://github.com/spmjs/apm",
   "author": {
     "name": "Hsiaoming Yang",
     "email": "me@lepture.com"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/spmjs/spm-alipay-suite.git"
+    "url": "git://github.com/spmjs/apm.git"
   },
   "bugs": {
-    "url": "https://github.com/spmjs/spm-alipay-suite/issues"
+    "url": "https://github.com/spmjs/apm/issues"
   },
   "engines": {
     "node": ">= 0.8.6"
