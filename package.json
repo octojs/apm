@@ -29,7 +29,7 @@
     "grunt-contrib-stylus": "~0.7.0",
     "grunt-contrib-less": "~0.7.0",
     "grunt-contrib-watch": "~0.5.1",
-    "grunt-peaches": "~0.2.1",
+    "grunt-peaches": "~0.2.2",
     "grunt-scp": "~0.1.5",
     "semver": "~2.1.0",
     "colorful": "~2.1.0"
