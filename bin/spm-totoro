@@ -17,23 +17,22 @@ while (args[0] && !/totoro$/.test(args[0])) {
 }
 args.shift();
 
+var soruce = '?dist';
+if (args[0] === '-s') {
+    soruce = '';
+}
+
 /*
   add runner
 */
 
 var i = args.indexOf('--runner');
-var runner = '_site/tests/runner.html';
+var runner = '_site/tests/runner.html' + soruce;
 if (i > -1) {
   args.splice(i + 1, 1, runner);
 } else {
   args.push('--runner');
   args.push(runner);
-}
-
-if (!fs.existsSync(path.resolve(runner))) {
-  console.log();
-  console.log(runner + ' not exist. You should run ' + 'spm doc build'.to.cyan.bold.color + ' or ' + 'nico build'.to.cyan.bold.color);
-  process.exit(1);
 }
 
 runCommands([
@@ -42,3 +41,4 @@ runCommands([
 ])(function() {
 
 });
+
