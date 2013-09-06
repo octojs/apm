@@ -144,6 +144,7 @@ module.exports = function(grunt) {
       sprite: {
         options: pkg.spm.peaches,
         files: [{
+          expand: true,
           cwd: '.build/dist',
           src: '**/*.css',
           dest: '.build/dist'
