@@ -50,10 +50,10 @@ async.waterfall([
           binary: 'spm-watch',
           description: 'Deploy automaticly when you change local files'
         });
-        console.log(' Installing spm plugin spm-check.'.green);
+        console.log(' Installing spm plugin spm-doctor.'.green);
         spm.plugin.install({
-          name: 'check',
-          binary: 'spm-check',
+          name: 'doctor',
+          binary: 'spm-doctor',
           description: 'check environment'
         });
         console.log(' Installing spm plugin spm-test.'.green);

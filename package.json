@@ -1,7 +1,7 @@
 {
   "name": "apm",
   "description": "Alipay package manager, a alipay suite of tools base on spm.",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "homepage": "https://github.com/spmjs/apm",
   "author": {
     "name": "Hsiaoming Yang",
@@ -41,7 +41,7 @@
   },
   "bin": {
     "spm-zip": "bin/spm-zip",
-    "spm-check": "bin/spm-check",
+    "spm-doctor": "bin/spm-doctor",
     "spm-test": "bin/spm-test",
     "spm-totoro": "bin/spm-totoro",
     "spm-watch": "bin/spm-watch"
