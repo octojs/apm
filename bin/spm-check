@@ -8,7 +8,15 @@ var semver = require('semver');
 var spmrc = require('spmrc');
 require('colorful').colorful();
 
-var errorHappend = false;
+var Errors = {
+    exised: false,
+    sudo: '',
+    path: '',
+    spmrc: '',
+    version: ''
+};
+var issueNo = 1;
+console.log();
 
 var DEPS = 'https://raw.github.com/spmjs/apm/master/scripts/deps.json';
 var HOME = process.env.HOME || process.env.USERPROFILE;
@@ -56,15 +64,15 @@ if (process.getuid) {
   assert(stat1.uid === process.getuid(),
     installDir + ' is granted',
     installDir + ' should be granted by ' + cmd.to.red.bold.color
-    );
+    'sudo');
 
   var npmCache = path.join(HOME, '.npm');
   var stat2 = fs.lstatSync(npmCache);
   var cmd = 'sudo chown -R ' + process.env.USER + ' ' + npmCache;
   assert(stat2.uid === process.getuid(),
     npmCache + ' is granted',
-    npmCache + ' should be granted by ' + cmd.to.red.bold.color
-    );
+    npmCache + ' should be granted by ' + cmd.to.red.bold.color,
+    'sudo');
 }
 
 // check PATH
@@ -73,7 +81,8 @@ var hasPath = paths.some(function(o) {
 });
 assert(hasPath,
   'PATH ' + binDir + ' is specified',
-  'PATH should be ' + binDir.to.red.bold.color);
+  'PATH should be ' + binDir.to.red.bold.color,
+  'path');
 
 if (/node_modules$/.test(nodepath) && !fs.existsSync(path.join(nodepath, '.bin'))) {
   // check NODE_PATH
@@ -86,7 +95,7 @@ if (/node_modules$/.test(nodepath) && !fs.existsSync(path.join(nodepath, '.bin')
   assert(np === nodepath,
     'NODE_PATH ' + nodepath + ' is specified',
     'NODE_PATH should be ' + nodepath.to.red.bold.color
-    );
+  'path');
 
   // check node and modules in same directory
   //assert(nodepath === path.join(installDir, 'lib', 'node_modules'),
@@ -113,7 +122,7 @@ checkSpmrc('source.alipay.url', 'http://yuan.alipay.im');
 */
 var p = path.join(process.env.NODE_PATH, 'apm');
 var pkg = require(path.join(p, 'package.json'));
-assert(pkg.version, 'Apm version is ' + pkg.version);
+assert(pkg.version, 'Apm version is ' + pkg.version, 'version');
 
 /*
   Check module version
@@ -124,11 +133,31 @@ getDeps(function(deps) {
     checkModule(module, deps[module]);
   });
 
-  if (errorHappend) {
-    console.log('');
-    console.log('        Something wrong happend.'.to.red.color);
-    console.log('        Try "' + 'npm install apm -g'.to.green.color +'" to fix it.');
+  console.log();
+
+  if (Errors.exsited) {
+    console.log('        There is some mistakes!'.to.red.color);
+  } else {
+    console.log('        Apm is ready!'.to.green.color);
   }
+
+  if (Errors['sudo']) {
+    console.log('        - '.to.grey.color +
+      'Try red hint to fix ' + Errors['sudo'].to.cyan.color);
+  }
+  if (Errors['path']) {
+    console.log('        - '.to.grey.color +
+      'Edit your bash profile to fix ' + Errors['path'].to.cyan.color);
+  }
+  if (Errors['spmrc']) {
+    console.log('        - '.to.grey.color +
+      'Edit' + spmrc.spmrcfile.to.green.color + 'to fix ' + Errors['spmrc'].to.cyan.color);
+  }
+  if (Errors['version']) {
+    console.log('        - '.to.grey.color +
+      'Try "' + 'npm install apm -g'.to.green.color +'" to fix ' + Errors['version'].to.cyan.color);
+  }
+
 });
 
 
@@ -138,7 +167,8 @@ getDeps(function(deps) {
 function checkSpmrc(key, value) {
   assert(spmrc.get(key) === value,
     'spmrc:' + key + ' is right',
-    'spmrc:' + key + ' should be ' + value.to.red.bold.color + ' but ' + (spmrc.get(key) || '\"\"').to.red.bold.color);
+    'spmrc:' + key + ' should be ' + value.to.red.bold.color + ' but ' + (spmrc.get(key) || '\"\"').to.red.bold.color,
+    'spmrc');
 }
 
 function checkModule(module, version) {
@@ -150,7 +180,8 @@ function checkModule(module, version) {
       var pkg = require(path.join(p, 'package.json'));
       assert(semver.gte(pkg.version, version),
         module + ' has right version ' + pkg.version,
-        module + ' should granter than ' + version.to.red.bold.color + ' but ' + pkg.version.to.red.bold.color);
+        module + ' should granter than ' + version.to.red.bold.color + ' but ' + pkg.version.to.red.bold.color,
+        'version');
     } catch(e) {}
   }
 }
@@ -159,9 +190,10 @@ function checkModule(module, version) {
   assertion
 */
 
-function assert(condition, okMsg, failMsg) {
+function assert(condition, okMsg, failMsg, type) {
   if (!condition) {
-    errorHappend = true;
+    Errors.existed = true;
+    Errors[type] += '#' + issueNo + ' ';
   }
   var print = ['        checked'.to.cyan.color, ': '];
   print.push(condition ?
