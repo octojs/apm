@@ -63,7 +63,7 @@ if (process.getuid) {
   var cmd = 'sudo chown -R ' + process.env.USER + ' ' + installDir;
   assert(stat1.uid === process.getuid(),
     installDir + ' is granted',
-    installDir + ' should be granted by ' + cmd.to.red.bold.color
+    installDir + ' should be granted by ' + cmd.to.red.bold.color,
     'sudo');
 
   var npmCache = path.join(HOME, '.npm');
@@ -94,8 +94,8 @@ if (/node_modules$/.test(nodepath) && !fs.existsSync(path.join(nodepath, '.bin')
 
   assert(np === nodepath,
     'NODE_PATH ' + nodepath + ' is specified',
-    'NODE_PATH should be ' + nodepath.to.red.bold.color
-  'path');
+    'NODE_PATH should be ' + nodepath.to.red.bold.color,
+    'path');
 
   // check node and modules in same directory
   //assert(nodepath === path.join(installDir, 'lib', 'node_modules'),
@@ -135,7 +135,7 @@ getDeps(function(deps) {
 
   console.log();
 
-  if (Errors.exsited) {
+  if (Errors.existed) {
     console.log('        There is some mistakes!'.to.red.color);
   } else {
     console.log('        Apm is ready!'.to.green.color);
@@ -195,7 +195,7 @@ function assert(condition, okMsg, failMsg, type) {
     Errors.existed = true;
     Errors[type] += '#' + issueNo + ' ';
   }
-  var print = ['        checked'.to.cyan.color, ': '];
+  var print = [('        checked #' + issueNo++).to.cyan.color, ': '];
   print.push(condition ?
     '✔ '.to.green.bold.color + okMsg :
     ('✘ ').to.red.bold.color + failMsg);
