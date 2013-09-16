@@ -5,6 +5,7 @@
 ## 0.4.4
 
 - spm check 改为 spm doctor，增强了排错功能。
+- spm test 的 server 模式有点问题，改为始终是本地模式。
 
 ## 0.4.3
 
