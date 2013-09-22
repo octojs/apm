@@ -34,4 +34,4 @@ if (typeof commander.password === 'string') {
 
 var grunt = require('spm-grunt');
 
-grunt.invokeTask('watch', options);
+grunt.invokeTask('spm-watch', options);

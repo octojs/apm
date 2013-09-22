@@ -261,5 +261,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', ['scp', 'delete-deploy-file', 'check-online:deploy', 'publish']);
   grunt.registerTask('build', taskList);
+  grunt.registerTask('spm-watch', ['build', 'scp', 'watch']);
 
 };
