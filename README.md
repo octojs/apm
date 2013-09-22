@@ -22,7 +22,7 @@ apm 是支付宝内部把 spm 及其相关插件打包成一套统一工具集�
 $ spm config source.default.url https://spmjs.org
 ```
 
-如果不知道是否安装了 apm，请运行 `spm check`，如果能运行，说明你安装了。
+如果不知道是否安装了 apm，请运行 `spm doctor`，如果能运行，说明你安装了。
 
 ## 安装
 
@@ -42,7 +42,7 @@ $ npm install apm -g -f
 安装完后可以检查下你的环境
 
 ```
-$ spm check
+$ spm doctor
 ```
 
 ## Package.json
@@ -81,7 +81,7 @@ $ spm check
 
 - `spm zip` 打成 zip 包 ([文档](https://github.com/spmjs/apm/#spm-zip))
 
-- `spm check` 检查 spm 配置环境和相关插件的版本是否正确 ([文档](https://github.com/spmjs/apm/#spm-check))
+- `spm doctor` 检查 spm 配置环境和相关插件的版本是否正确 ([文档](https://github.com/spmjs/apm/#spm-doctor))
 
 - `spm test` 使用 phantomjs 跑测试用例，测试 src 和 dist 代码，并使用 jscoverage 生成覆盖率文档。`需要先用 spm doc 生成本地测试文档`
 
@@ -186,7 +186,7 @@ $ spm doc watch
 $ spm doc publish
 ```
 
-### spm check
+### spm doctor
 
 可以通过这个命令检查当前环境，排错时首推功能。
 
