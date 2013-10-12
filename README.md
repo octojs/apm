@@ -49,7 +49,7 @@ $ spm doctor
 
 `spm2.x` 的 `package.json` 和 `spm1.x` 略不相同，需要修改才能用这个工具。
 
-查看[package.json](http://docs.spmjs.org/en/package)
+查看 [package.json](http://docs.spmjs.org/en/package)
 
 
 ## 支付宝套装收罗的功能有：
