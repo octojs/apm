@@ -40,6 +40,7 @@
     "uninstall": "node scripts/uninstall.js"
   },
   "bin": {
+    "apm": "bin/apm",
     "spm-zip": "bin/spm-zip",
     "spm-doctor": "bin/spm-doctor",
     "spm-test": "bin/spm-test",
