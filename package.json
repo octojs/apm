@@ -1,7 +1,7 @@
 {
   "name": "apm",
   "description": "Alipay package manager, a alipay suite of tools base on spm.",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "homepage": "https://github.com/spmjs/apm",
   "author": {
     "name": "Hsiaoming Yang",
@@ -27,11 +27,11 @@
     "spmrc": "~0.1.3",
     "grunt-check-online": "~0.1.2",
     "grunt-contrib-stylus": "~0.7.0",
-    "grunt-contrib-less": "~0.7.0",
+    "grunt-contrib-less": "~0.8.1",
     "grunt-contrib-watch": "~0.5.1",
     "grunt-peaches": "~0.2.3",
     "grunt-scp": "~0.1.5",
-    "semver": "~2.1.0",
+    "semver": "~2.2.1",
     "colorful": "~2.1.0"
   },
   "scripts": {
