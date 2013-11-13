@@ -113,16 +113,9 @@ async.waterfall([
     },
     function(callback) {
       console.log();
-      console.log('Installing init template & nico template.'.cyan);
+      console.log('Installing nico template.'.cyan);
 
       var tasks = [];
-      // install spm-init templates
-      tasks.push(function(done) {
-        gitInstall('git://github.com/aralejs/template-arale.git', '~/.spm/init/arale', done);
-      });
-      tasks.push(function(done) {
-        gitInstall('git://github.com/aralejs/template-alice.git', '~/.spm/init/alice', done);
-      });
       tasks.push(function(done) {
       // install nico themes
         gitInstall('https://github.com/aralejs/nico-arale.git', '~/.spm/themes/arale', done);
@@ -130,7 +123,7 @@ async.waterfall([
       tasks.push(function(done) {
         gitInstall('https://github.com/aliceui/nico-alice.git', '~/.spm/themes/alice', done);
       });
-      
+
       async.waterfall(tasks, callback);
     },
     function(callback) {
