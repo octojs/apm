@@ -3,7 +3,7 @@
 var fs = require('fs');
 var path = require('path');
 var spawn = require('win-spawn');
-var runCommands = require('../lib/run-commands');
+var exeq = require('exeq');
 require('colorful').colorful();
 
 var args = process.argv.slice();
@@ -35,10 +35,8 @@ if (i > -1) {
   args.push(runner);
 }
 
-runCommands([
+exeq([
   'spm doc build',
   'totoro '+args.join(' ')
-])(function() {
-
-});
+]).run();
 

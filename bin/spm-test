@@ -1,19 +1,19 @@
 #!/usr/bin/env node
 
-var runCommands = require('../lib/run-commands');
+var exeq = require('exeq');
 var path = require('path');
 var output = '_site/coverage.html';
 var outputJSON = '_site/coverage.json';
 require('colorful').colorful();
 
-runCommands([
+exeq([
   'spm doc build',
   'mocha-browser _site/tests/runner.html',
   'mocha-browser _site/tests/runner.html?dist',
   'rm -fr ' + path.join('_site', 'src-cov'),
   'jscoverage --encoding=utf8 src _site/src-cov',
   'mocha-browser _site/tests/runner.html?cov -R html-cov -o ' + outputJSON +' > ' + output,
-])(function() {
+]).on('done', function() {
   try{
     var covJSON = require(path.resolve(outputJSON));
 
@@ -33,4 +33,4 @@ runCommands([
     console.log('');
     console.log(('fail to output ' + outputJSON).to.red.color);
   }
-});
+}).run();

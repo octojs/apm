@@ -32,7 +32,8 @@
     "grunt-peaches": "~0.2.3",
     "grunt-scp": "~0.1.5",
     "semver": "~2.2.1",
-    "colorful": "~2.1.0"
+    "colorful": "~2.1.0",
+    "exeq": "~0.4.0"
   },
   "scripts": {
     "preinstall": "node scripts/preinstall.js",
