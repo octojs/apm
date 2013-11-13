@@ -112,21 +112,6 @@ async.waterfall([
       }
     },
     function(callback) {
-      console.log();
-      console.log('Installing nico template.'.cyan);
-
-      var tasks = [];
-      tasks.push(function(done) {
-      // install nico themes
-        gitInstall('https://github.com/aralejs/nico-arale.git', '~/.spm/themes/arale', done);
-      });
-      tasks.push(function(done) {
-        gitInstall('https://github.com/aliceui/nico-alice.git', '~/.spm/themes/alice', done);
-      });
-
-      async.waterfall(tasks, callback);
-    },
-    function(callback) {
       var isWindows = process.platform === 'win32';
 
       if (isWindows) {

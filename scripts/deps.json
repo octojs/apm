@@ -4,7 +4,7 @@
   "spm-build": "0.3.11",
   "spm-status": "0.2.4",
   "spm-deploy": "0.2.4",
-  "spm-doc": "0.2.10",
+  "spm-doc": "0.3.0",
   "cdn": "0.2.4",
   "checkurl": "0.2.3",
   "totoro": "0.4.0",
