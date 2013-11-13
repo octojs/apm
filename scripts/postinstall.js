@@ -5,7 +5,7 @@ var fs = require('fs');
 var path = require('path');
 var spmrc = require('spmrc');
 var semver = require('semver');
-var runCommands = require('../lib/run-commands');
+var exeq = require('exeq');
 var async = require('async');
 var deps = require('./deps.json');
 require('colorful').toxic();
@@ -120,9 +120,9 @@ async.waterfall([
         console.log();
         console.log('Installing spm completion.'.cyan);
 
-        runCommands([
+        exeq([
           ['cp', path.join(__dirname, '.spm_completion'), spmrc.get('user.home')].join(' ')
-        ])(function() {
+        ]).on('done', function() {
           var text = '\n. ~/.spm_completion';
           var profile = spmrc.get('user.home') + '/.profile';
           var bashRc = spmrc.get('user.home') + '/.bashrc';
@@ -141,7 +141,7 @@ async.waterfall([
             }
           }
           callback();
-        });
+        }).run();
       }
     }
 ],
@@ -172,9 +172,9 @@ function installModule(module, version, callback) {
     } catch(e) { }
   }
   console.log(('  Installing npm module ' + module + '@' + version).green);
-  runCommands([
+  exeq([
     'npm install ' + module + ' -g --silent'
-  ])(callback);
+  ]).on('done', callback).run();
 
   function skip(message) {
     console.log(('  Skip npm module ' + module + '@' + version + ', because ' + message).grey);
@@ -195,7 +195,7 @@ function gitInstall(url, dest, callback) {
       cwd: dest
     };
   }
-  runCommands([command])(callback);
+  exeq([command]).on('done', callback).run();
 }
 
 function writeProfile (file, text) {
