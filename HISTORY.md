@@ -5,7 +5,7 @@
 ## 0.5.0
 
 - 简化 spm init 的功能，只有一个默认起始值。
-- 升级 spm doc 。
+- 升级 spm doc ，整合 arale 和 alice 主题为 https://github.com/spmjs/nico-cmd。
 
 ## 0.4.4
 
