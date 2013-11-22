@@ -18,6 +18,12 @@ var Errors = {
 var issueNo = 1;
 console.log();
 
+// Show apm version
+
+var apmVersion = require('../package').version;
+console.log(('   apm@' + apmVersion).to.white.color);
+console.log();
+
 var DEPS = 'https://raw.github.com/spmjs/apm/master/scripts/deps.json';
 var HOME = process.env.HOME || process.env.USERPROFILE;
 var DEPS_FILE = path.join(HOME, '.spm', 'deps.json');
