@@ -174,7 +174,10 @@ function installModule(module, version, callback) {
   console.log(('  Installing npm module ' + module + '@' + version).green);
   exeq([
     'npm install ' + module + ' -g --silent'
-  ]).on('done', callback).run();
+  ]).on('done', function() {
+    console.log((module + '@' + version + ' installed.').green);
+    callback();
+  }).run();
 
   function skip(message) {
     console.log(('  Skip npm module ' + module + '@' + version + ', because ' + message).grey);
