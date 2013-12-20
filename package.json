@@ -1,7 +1,7 @@
 {
   "name": "apm",
   "description": "Alipay package manager, a alipay suite of tools base on spm.",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "homepage": "https://github.com/spmjs/apm",
   "author": {
     "name": "Hsiaoming Yang",
