@@ -7,9 +7,11 @@ module.exports = function(grunt) {
     var info = spawn('svn', ['info']);
     var pkg = require(path.resolve('./package.json'));
     var done = this.async();
+    var errExit = false;
 
     // svn 不存在的情况马上返回
     info.on('error', function() {
+      errExit = true;
       done();
     });
 
@@ -22,6 +24,11 @@ module.exports = function(grunt) {
     });
 
     info.on('close', function (code) {
+      // 报错退出后不触发 close 的逻辑
+      // 所以这里需要判断下
+      if (errExit) {
+        return;
+      }
       // 取不到 svn info 信息
       if (errStr) {
         if (/is not a working copy/.test(errStr)) {
