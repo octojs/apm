@@ -2,6 +2,11 @@
 
 ---
 
+## 0.5.4
+
+- 修复 check-online 时 UNABLE_TO_VERIFY_LEAF_SIGNATURE 的错误
+- 
+
 ## 0.5.3
 
 - 升级 grunt-contrib-stylus 到 0.11.0
