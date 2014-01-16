@@ -5,10 +5,10 @@
   "spm-status": "0.2.4",
   "spm-deploy": "0.2.4",
   "spm-doc": "0.3.0",
-  "cdn": "0.2.5",
+  "cdn": "0.2.7",
   "checkurl": "0.2.3",
   "totoro": "0.4.0",
-  "mocha-browser": "0.1.5",
+  "mocha-browser": "0.2.0",
   "phantomjs": "1.9.1-9",
   "jscoverage": "0.3.8"
 }
