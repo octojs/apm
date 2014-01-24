@@ -1,7 +1,7 @@
 {
-  "spm": "2.2.4",
+  "spm": "2.2.5",
   "spm-init": "0.5.0",
-  "spm-build": "0.3.12",
+  "spm-build": "0.3.13",
   "spm-status": "0.2.4",
   "spm-deploy": "0.2.4",
   "spm-doc": "0.3.0",
