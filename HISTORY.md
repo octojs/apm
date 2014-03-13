@@ -2,10 +2,17 @@
 
 ---
 
+## 0.5.6
+
+- 修复 spm zip 时报错的问题
+
+## 0.5.5
+
+- 修复重复压缩 js 文件的问题
+
 ## 0.5.4
 
 - 修复 check-online 时 UNABLE_TO_VERIFY_LEAF_SIGNATURE 的错误
-- 
 
 ## 0.5.3
 
