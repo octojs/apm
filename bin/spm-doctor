@@ -18,13 +18,13 @@ var Errors = {
 var issueNo = 1;
 console.log();
 
-// Show apm version
+// Show opm version
 
-var apmVersion = require('../package').version;
-console.log(('   apm@' + apmVersion).to.white.color);
+var opmVersion = require('../package').version;
+console.log(('   opm@' + opmVersion).to.white.color);
 console.log();
 
-var DEPS = 'https://raw.github.com/spmjs/apm/master/scripts/deps.json';
+var DEPS = 'https://raw.github.com/octojs/opm/master/scripts/deps.json';
 var HOME = process.env.HOME || process.env.USERPROFILE;
 var DEPS_FILE = path.join(HOME, '.spm', 'deps.json');
 
@@ -48,14 +48,14 @@ if (p.length) {
 // e.g. /usr/local
 var installDir = path.join(nodeFile, '..').replace(/[\\|\/]bin/, '');
 // e.g. /usr/local/lib/node_modules
-var nodepath = __dirname.replace(/(\/|\\)apm(\/|\\)bin$/, '');
+var nodepath = __dirname.replace(/(\/|\\)opm(\/|\\)bin$/, '');
 var binDir;
 if (isWindows) {
   // e.g. C:\Users\xxx\AppData\Roaming\npm
-  binDir = __dirname.replace(/\\node_modules\\apm\\bin$/, '');
+  binDir = __dirname.replace(/\\node_modules\\opm\\bin$/, '');
 } else {
   // e.g. /usr/local/bin
-  binDir = __dirname.replace(/lib\/node_modules\/apm\/bin$/, 'bin');
+  binDir = __dirname.replace(/lib\/node_modules\/opm\/bin$/, 'bin');
 }
 
 /*
@@ -124,11 +124,11 @@ checkSpmrc('source.spmjs.url', 'https://spmjs.org');
 checkSpmrc('source.alipay.url', 'http://yuan.alipay.im');
 
 /*
-  Show apm version
+  Show opm version
 */
-var p = path.join(process.env.NODE_PATH, 'apm');
+var p = path.join(process.env.NODE_PATH, 'opm');
 var pkg = require(path.join(p, 'package.json'));
-assert(pkg.version, 'Apm version is ' + pkg.version, 'version');
+assert(pkg.version, 'opm version is ' + pkg.version, 'version');
 
 /*
   Check module version
@@ -144,7 +144,7 @@ getDeps(function(deps) {
   if (Errors.existed) {
     console.log('        There is some mistakes!'.to.red.color);
   } else {
-    console.log('        Apm is ready!'.to.green.color);
+    console.log('        opm is ready!'.to.green.color);
   }
 
   if (Errors['sudo']) {
@@ -161,7 +161,7 @@ getDeps(function(deps) {
   }
   if (Errors['version']) {
     console.log('        - '.to.grey.color +
-      'Try "' + 'npm install apm -g'.to.green.color +'" to fix ' + Errors['version'].to.cyan.color);
+      'Try "' + 'npm install opm -g'.to.green.color +'" to fix ' + Errors['version'].to.cyan.color);
   }
 
 });

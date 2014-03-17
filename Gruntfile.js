@@ -202,7 +202,7 @@ module.exports = function(grunt) {
     grunt.log.error("You shouldn't use grunt to run the tasks");
   }
 
-  grunt.loadGlobalTasks('apm');
+  grunt.loadGlobalTasks('opm');
   grunt.loadGlobalTasks('spm-build');
 
   var builder = require('spm-build');

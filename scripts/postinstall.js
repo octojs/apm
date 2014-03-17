@@ -96,8 +96,8 @@ async.waterfall([
           spmrc.set('online-status.dev', 'http://assets.dev.alipay.net');
         }
         if (!spmrc.get('source:default.url') ||
-            spmrc.get('source:default.url') === 'https://spmjs.org') {
-          spmrc.set('source:default.url', 'http://yuan.alipay.im');
+            spmrc.get('source:default.url') === 'http://yuan.alipay.im') {
+          spmrc.set('source:default.url', 'https://spmjs.org');
         }
         if (!spmrc.get('source:spmjs.url')) {
           spmrc.set('source:spmjs.url', 'https://spmjs.org');
