@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 var fs = require('fs');
 var path = require('path');
 var url = require('url');
@@ -7,113 +6,100 @@ var https = require('https');
 var semver = require('semver');
 var spmrc = require('spmrc');
 require('colorful').colorful();
-
 var Errors = {
-    exised: false,
-    sudo: '',
-    path: '',
-    spmrc: '',
+    exised : false,
+    sudo   : '',
+    path   : '',
+    spmrc  : '',
     version: ''
 };
 var issueNo = 1;
 console.log();
-
 // Show opm version
-
 var opmVersion = require('../package').version;
 console.log(('   opm@' + opmVersion).to.white.color);
 console.log();
-
 var DEPS = 'https://raw.github.com/octojs/opm/master/scripts/deps.json';
 var HOME = process.env.HOME || process.env.USERPROFILE;
 var DEPS_FILE = path.join(HOME, '.spm', 'deps.json');
-
 var isWindows = process.platform === 'win32';
-var paths = process.env.PATH.split(isWindows ? ';' : ':');
-
+var paths = process.env.PATH.split(isWindows
+    ? ';'
+    : ':');
 // Get node file, `process.execPath` return symbolic link
 // e.g. /usr/local/bin/node
 var nodeFile;
-var p = paths.filter(function(element) {
-  return fs.existsSync(path.join(element, isWindows?'node.exe':'node'));
+var p = paths.filter(function (element) {
+    return fs.existsSync(path.join(element, isWindows
+        ? 'node.exe'
+        : 'node'));
 });
 if (p.length) {
-  // process.execPath
-  nodeFile = p[0];
+    // process.execPath
+    nodeFile = p[0];
 } else {
-  console.log('        node not exists');
-  process.exit(1);
+    console.log('        node not exists');
+    process.exit(1);
 }
-
 // e.g. /usr/local
 var installDir = path.join(nodeFile, '..').replace(/[\\|\/]bin/, '');
 // e.g. /usr/local/lib/node_modules
 var nodepath = __dirname.replace(/(\/|\\)opm(\/|\\)bin$/, '');
 var binDir;
 if (isWindows) {
-  // e.g. C:\Users\xxx\AppData\Roaming\npm
-  binDir = __dirname.replace(/\\node_modules\\opm\\bin$/, '');
+    // e.g. C:\Users\xxx\AppData\Roaming\npm
+    binDir = __dirname.replace(/\\node_modules\\opm\\bin$/, '');
 } else {
-  // e.g. /usr/local/bin
-  binDir = __dirname.replace(/lib\/node_modules\/opm\/bin$/, 'bin');
+    // e.g. /usr/local/bin
+    binDir = __dirname.replace(/lib\/node_modules\/opm\/bin$/, 'bin');
 }
-
 /*
-  Check environment
-*/
+ Check environment
+ */
 
 // check directory permission
 // POSIX platforms should ignore sudo
 if (process.getuid) {
-  var stat1 = fs.lstatSync(installDir);
-  var cmd = 'sudo chown -R ' + process.env.USER + ' ' + installDir;
-  assert(stat1.uid === process.getuid(),
-    installDir + ' is granted',
-    installDir + ' should be granted by ' + cmd.to.red.bold.color,
-    'sudo');
-
-  var npmCache = path.join(HOME, '.npm');
-  var stat2 = fs.lstatSync(npmCache);
-  var cmd = 'sudo chown -R ' + process.env.USER + ' ' + npmCache;
-  assert(stat2.uid === process.getuid(),
-    npmCache + ' is granted',
-    npmCache + ' should be granted by ' + cmd.to.red.bold.color,
-    'sudo');
+    var stat1 = fs.lstatSync(installDir);
+    var cmd = 'sudo chown -R ' + process.env.USER + ' ' + installDir;
+    assert(stat1.uid === process.getuid(),
+        installDir + ' is granted',
+        installDir + ' should be granted by ' + cmd.to.red.bold.color,
+        'sudo');
+    var npmCache = path.join(HOME, '.npm');
+    var stat2 = fs.lstatSync(npmCache);
+    var cmd = 'sudo chown -R ' + process.env.USER + ' ' + npmCache;
+    assert(stat2.uid === process.getuid(),
+        npmCache + ' is granted',
+        npmCache + ' should be granted by ' + cmd.to.red.bold.color,
+        'sudo');
 }
-
 // check PATH
-var hasPath = paths.some(function(o) {
-  return o === binDir;
+var hasPath = paths.some(function (o) {
+    return o === binDir;
 });
 assert(hasPath,
-  'PATH ' + binDir + ' is specified',
-  'PATH should be ' + binDir.to.red.bold.color,
-  'path');
-
-if (/node_modules$/.test(nodepath) && !fs.existsSync(path.join(nodepath, '.bin'))) {
-  // check NODE_PATH
-
-  // win32 c:\ or C:\
-  var np = process.env.NODE_PATH.replace(/^([a-z]:)(.*)$/, function(match, disk, rest) {
-    return disk.toUpperCase() + rest;
-  });
-
-  assert(np === nodepath,
-    'NODE_PATH ' + nodepath + ' is specified',
-    'NODE_PATH should be ' + nodepath.to.red.bold.color,
+    'PATH ' + binDir + ' is specified',
+    'PATH should be ' + binDir.to.red.bold.color,
     'path');
-
-  // check node and modules in same directory
-  //assert(nodepath === path.join(installDir, 'lib', 'node_modules'),
-  //  'nodeFile(' + nodeFile + ') and modules(' + nodepath + ') is in same directory',
-  //  'nodeFile(' + nodeFile.to.red.bold.color + ') and modules(' + nodepath.to.red.bold.color + ') is not in same directory');
+if (/node_modules$/.test(nodepath) && !fs.existsSync(path.join(nodepath, '.bin'))) {
+    // check NODE_PATH
+    // win32 c:\ or C:\
+    var np = process.env.NODE_PATH.replace(/^([a-z]:)(.*)$/, function (match, disk, rest) {
+        return disk.toUpperCase() + rest;
+    });
+    assert(np === nodepath,
+        'NODE_PATH ' + nodepath + ' is specified',
+        'NODE_PATH should be ' + nodepath.to.red.bold.color,
+        'path');
+    // check node and modules in same directory
+    //assert(nodepath === path.join(installDir, 'lib', 'node_modules'),
+    //  'nodeFile(' + nodeFile + ') and modules(' + nodepath + ') is in same directory',
+    //  'nodeFile(' + nodeFile.to.red.bold.color + ') and modules(' + nodepath.to.red.bold.color + ') is not in same directory');
 }
-
-
 /*
-  Check spmrc
-*/
-
+ Check spmrc
+ */
 var gruntfile = path.join(__dirname, '..', 'Gruntfile.js');
 checkSpmrc('user.gruntfile', path.normalize(gruntfile));
 checkSpmrc('online-status.online', 'https://a.alipayobjects.com');
@@ -122,120 +108,110 @@ checkSpmrc('online-status.dev', 'http://assets.dev.alipay.net');
 checkSpmrc('source.default.url', 'http://yuan.alipay.im');
 checkSpmrc('source.spmjs.url', 'https://spmjs.org');
 checkSpmrc('source.alipay.url', 'http://yuan.alipay.im');
-
 /*
-  Show opm version
-*/
+ Show opm version
+ */
 var p = path.join(process.env.NODE_PATH, 'opm');
 var pkg = require(path.join(p, 'package.json'));
 assert(pkg.version, 'opm version is ' + pkg.version, 'version');
-
 /*
-  Check module version
-*/
-
-getDeps(function(deps) {
-  Object.keys(deps).forEach(function(module) {
-    checkModule(module, deps[module]);
-  });
-
-  console.log();
-
-  if (Errors.existed) {
-    console.log('        There is some mistakes!'.to.red.color);
-  } else {
-    console.log('        opm is ready!'.to.green.color);
-  }
-
-  if (Errors['sudo']) {
-    console.log('        - '.to.grey.color +
-      'Try red hint to fix ' + Errors['sudo'].to.cyan.color);
-  }
-  if (Errors['path']) {
-    console.log('        - '.to.grey.color +
-      'Edit your bash profile to fix ' + Errors['path'].to.cyan.color);
-  }
-  if (Errors['spmrc']) {
-    console.log('        - '.to.grey.color +
-      'Edit ' + spmrc.spmrcfile.to.green.color + ' to fix ' + Errors['spmrc'].to.cyan.color);
-  }
-  if (Errors['version']) {
-    console.log('        - '.to.grey.color +
-      'Try "' + 'npm install opm -g'.to.green.color +'" to fix ' + Errors['version'].to.cyan.color);
-  }
-
+ Check module version
+ */
+getDeps(function (deps) {
+    Object.keys(deps).forEach(function (module) {
+        checkModule(module, deps[module]);
+    });
+    console.log();
+    if (Errors.existed) {
+        console.log('        There is some mistakes!'.to.red.color);
+    } else {
+        console.log('        opm is ready!'.to.green.color);
+    }
+    if (Errors['sudo']) {
+        console.log('        - '.to.grey.color +
+            'Try red hint to fix ' + Errors['sudo'].to.cyan.color);
+    }
+    if (Errors['path']) {
+        console.log('        - '.to.grey.color +
+            'Edit your bash profile to fix ' + Errors['path'].to.cyan.color);
+    }
+    if (Errors['spmrc']) {
+        console.log('        - '.to.grey.color +
+            'Edit ' + spmrc.spmrcfile.to.green.color + ' to fix ' + Errors['spmrc'].to.cyan.color);
+    }
+    if (Errors['version']) {
+        console.log('        - '.to.grey.color +
+            'Try "' + 'npm install opm -g'.to.green.color + '" to fix ' + Errors['version'].to.cyan.color);
+    }
 });
-
-
 // Helper
 // ------
-
 function checkSpmrc(key, value) {
-  assert(spmrc.get(key) === value,
-    'spmrc:' + key + ' is right',
-    'spmrc:' + key + ' should be ' + value.to.red.bold.color + ' but ' + (spmrc.get(key) || '\"\"').to.red.bold.color,
-    'spmrc');
+    assert(spmrc.get(key) === value,
+        'spmrc:' + key + ' is right',
+        'spmrc:' + key + ' should be ' + value.to.red.bold.color + ' but ' + (spmrc.get(key) || '\"\"').to.red.bold.color,
+        'spmrc');
 }
-
 function checkModule(module, version) {
-  if (!process.env.NODE_PATH) return;
-  var p = path.join(process.env.NODE_PATH, module);
-  if (fs.existsSync(p)) {
-    // ignore when wrong format pkg
-    try {
-      var pkg = require(path.join(p, 'package.json'));
-      assert(semver.gte(pkg.version, version),
-        module + ' has right version ' + pkg.version,
-        module + ' should granter than ' + version.to.red.bold.color + ' but ' + pkg.version.to.red.bold.color,
-        'version');
-    } catch(e) {}
-  }
-}
-
-/*
-  assertion
-*/
-
-function assert(condition, okMsg, failMsg, type) {
-  if (!condition) {
-    Errors.existed = true;
-    Errors[type] += '#' + issueNo + ' ';
-  }
-  var print = [('        checked #' + issueNo++).to.cyan.color, ': '];
-  print.push(condition ?
-    '✔ '.to.green.bold.color + okMsg :
-    ('✘ ').to.red.bold.color + failMsg);
-  console.log(print.join(''));
-}
-
-/*
-  Get deps from server everyday
-*/
-
-function getDeps(callback) {
-  var local;
-  if (fs.existsSync(DEPS_FILE)) {
-    try {
-      local = require(DEPS_FILE);
-    } catch (e) {
-      console.log();
-      console.log('  Wrong Format: '.to.cyan.bold.color + DEPS_FILE);
+    if (!process.env.NODE_PATH) return;
+    var p = path.join(process.env.NODE_PATH, module);
+    if (fs.existsSync(p)) {
+        // ignore when wrong format pkg
+        try {
+            var pkg = require(path.join(p, 'package.json'));
+            assert(semver.gte(pkg.version, version),
+                module + ' has right version ' + pkg.version,
+                module + ' should granter than ' + version.to.red.bold.color + ' but ' + pkg.version.to.red.bold.color,
+                'version');
+        } catch (e) {
+        }
     }
-  }
-  var diff = local ? Math.floor((new Date().getTime() - local['_timestamp'])/86400000) : 0;
-  if (!local || diff >= 1 ) {
-    https.get(url.parse(DEPS), function(res) {
-      res.on('data', function(data) {
-        var j = JSON.parse(data.toString());
-        j['_timestamp'] = new Date().getTime();
-        fs.writeFile(DEPS_FILE, JSON.stringify(j), function (err) {
-          delete j['_timestamp'];
-          callback(j);
+}
+/*
+ assertion
+ */
+function assert(condition, okMsg, failMsg, type) {
+    if (!condition) {
+        Errors.existed = true;
+        Errors[type] += '#' + issueNo + ' ';
+    }
+    var print = [('        checked #' + issueNo++).to.cyan.color, ': '];
+    print.push(condition
+        ?
+               '✔ '.to.green.bold.color + okMsg
+        :
+               ('✘ ').to.red.bold.color + failMsg);
+    console.log(print.join(''));
+}
+/*
+ Get deps from server everyday
+ */
+function getDeps(callback) {
+    var local;
+    if (fs.existsSync(DEPS_FILE)) {
+        try {
+            local = require(DEPS_FILE);
+        } catch (e) {
+            console.log();
+            console.log('  Wrong Format: '.to.cyan.bold.color + DEPS_FILE);
+        }
+    }
+    var diff = local
+        ? Math.floor((new Date().getTime() - local['_timestamp']) / 86400000)
+        : 0;
+    if (!local || diff >= 1) {
+        https.get(url.parse(DEPS), function (res) {
+            res.on('data', function (data) {
+                var j = JSON.parse(data.toString());
+                j['_timestamp'] = new Date().getTime();
+                fs.writeFile(DEPS_FILE, JSON.stringify(j), function (err) {
+                    delete j['_timestamp'];
+                    callback(j);
+                });
+            });
         });
-      });
-    });
-  } else {
-    delete local['_timestamp'];
-    callback(local);
-  }
+    } else {
+        delete local['_timestamp'];
+        callback(local);
+    }
 }

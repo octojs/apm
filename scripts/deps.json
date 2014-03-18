@@ -1,14 +1,14 @@
 {
-  "spm": "2.2.5",
-  "spm-init": "0.5.0",
-  "spm-build": "0.3.13",
-  "spm-status": "0.2.4",
-  "spm-deploy": "0.2.4",
-  "spm-doc": "0.3.0",
-  "cdn": "0.2.7",
-  "checkurl": "0.2.3",
-  "totoro": "0.5.4",
-  "mocha-browser": "0.2.0",
-  "phantomjs": "1.9.1-9",
-  "jscoverage": "0.3.8"
+    "spm"          : "2.2.5",
+    "spm-init"     : "0.5.0",
+    "spm-build"    : "0.3.13",
+    "spm-status"   : "0.2.4",
+    "spm-deploy"   : "0.2.4",
+    "spm-doc"      : "0.3.0",
+    "cdn"          : "0.2.7",
+    "checkurl"     : "0.2.3",
+    "totoro"       : "0.5.4",
+    "mocha-browser": "0.2.0",
+    "phantomjs"    : "1.9.1-9",
+    "jscoverage"   : "0.3.8"
 }

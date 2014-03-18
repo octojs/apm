@@ -4,13 +4,13 @@
     "version"     : "0.5.7",
     "homepage"    : "https://github.com/octojs/opm",
     "author"      : {
-        "name" : "Hsiaoming Yang",
-        "email": "me@lepture.com"
+        "name" : "Yize",
+        "email": "yize.shc@gmail.com"
     },
     "maintainer"  : [
         {
-            "name" : "Yize",
-            "email": "yize.shc@gmail.com"
+            "name" : "Hsiaoming Yang",
+            "email": "me@lepture.com"
         }
     ],
     "repository"  : {
@@ -39,7 +39,8 @@
         "grunt-scp"           : "~0.1.5",
         "semver"              : "~2.2.1",
         "colorful"            : "~2.1.0",
-        "exeq"                : "~0.4.0"
+        "exeq"                : "~0.4.0",
+        "grunt-init"          : "~0.3.1"
     },
     "scripts"     : {
         "preinstall" : "node scripts/preinstall.js",
@@ -47,12 +48,13 @@
         "uninstall"  : "node scripts/uninstall.js"
     },
     "bin"         : {
-        "opm"       : "bin/opm",
-        "spm-zip"   : "bin/spm-zip",
-        "spm-doctor": "bin/spm-doctor",
-        "spm-test"  : "bin/spm-test",
-        "spm-totoro": "bin/spm-totoro",
-        "spm-watch" : "bin/spm-watch"
+        "opm"        : "bin/opm",
+        "spm-zip"    : "bin/spm-zip",
+        "spm-doctor" : "bin/spm-doctor",
+        "spm-test"   : "bin/spm-test",
+        "spm-totoro" : "bin/spm-totoro",
+        "spm-watch"  : "bin/spm-watch",
+        "opm-project": "bin/opm-project"
     },
     "keywords"    : [
         "spmplugin",

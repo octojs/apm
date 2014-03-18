@@ -3,7 +3,9 @@
 [![NPM version](https://badge.fury.io/js/apm.png)](http://badge.fury.io/js/apm)
 [![David Status](https://david-dm.org/spmjs/apm.png)](https://david-dm.org/spmjs/apm)
 
-Alipay package manager, a alipay suite of tools base on spm.
+Alinw package manager, a alinw suite of tools base on spm.
+
+and it`s base on `apm`
 
 这是一个基于 `spm2.x` 的套件集合，你可能需要先了解下 [spm](https://github.com/spmjs/spm2/)。
 
@@ -12,29 +14,19 @@ Alipay package manager, a alipay suite of tools base on spm.
 
 ## 特别说明
 
-0.3.0 版本后原 `spm-alipay-suite` 改名为 `apm`.
-
-apm 是支付宝内部把 spm 及其相关插件打包成一套统一工具集，安装后默认设置上一些内部专用的配置，比如源地址、deploy 部署地址等等。
-
-`apm` 会将你的 spm [默认源](http://docs.spmjs.org/en/config#source) 设为支付宝内部的 `http://yuan.alipay.im`，外网是无法访问的，如果你不需要，记得重置。
-
-```
-$ spm config source.default.url https://spmjs.org
-```
-
-如果不知道是否安装了 apm，请运行 `spm doctor`，如果能运行，说明你安装了。
+如果不知道是否安装了 opm，请运行 `spm doctor`，如果能运行，说明你安装了。
 
 ## 安装
 
 ```
-$ npm install apm -g
+$ npm install opm -g
 ```
 
-如果你之前安装过 `spm-alipay-suite`，在安装过程中可能会报 `Error: Refusing to delete` 的错误。
+如果你之前安装过 `apm`，在安装过程中可能会报 `Error: Refusing to delete` 的错误。
 此时不要着急，淡定地加上 `-f` 强制安装即可。
 
 ```
-$ npm install apm -g -f
+$ npm install opm -g -f
 ```
 
 如果你的环境需要 `sudo`，请先阅读这篇文章：http://aralejs.org/docs/installation.html
@@ -51,6 +43,15 @@ $ spm doctor
 
 查看 [package.json](http://docs.spmjs.org/en/package)
 
+
+## 新加入的特别为阿里内外定制的功能:
+
+```
+
+$ spm project
+```
+
+会默认按照阿里内外项目标准初始化组件
 
 ## 支付宝套装收罗的功能有：
 
@@ -198,7 +199,7 @@ $ spm doc publish
 
 具体功能可以查看 [peaches官网](http://peaches.io/) 和 [范例](https://github.com/afc163/peaches-example)。
 
-我们在 apm 中集成了peaches，在 package.json 中添加如下属性就可以启动 peaches 服务。调用 `spm build` 进行打包时时会自动帮你合并所有的背景图片。
+我们在 opm 中集成了peaches，在 package.json 中添加如下属性就可以启动 peaches 服务。调用 `spm build` 进行打包时时会自动帮你合并所有的背景图片。
 
 ```
   "spm": {

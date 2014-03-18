@@ -1,42 +1,34 @@
 #!/usr/bin/env node
-
 var path = require('path');
 var commander = require('commander');
 var zip = require('../lib/zip');
-
 commander.usage('[options]');
-
 commander
-  .option('-I, --input <dir>', 'input directory: [dist]')
-  .option('-O, --output <zipfile>', 'output zipfile')
-  .option('-s, --source <name>', 'source name of yuan')
-  .option('--format <format>', 'directory format: [{{family}}/{{name}}/{{version}}]')
-
-commander.on('--help', function() {
-  console.log();
-  console.log('  Examples:');
-  console.log();
-  console.log('   $ spm zip arale/class');
-  console.log('   $ spm zip arale/class@1.0.0');
-  console.log();
+    .option('-I, --input <dir>', 'input directory: [dist]')
+    .option('-O, --output <zipfile>', 'output zipfile')
+    .option('-s, --source <name>', 'source name of yuan')
+    .option('--format <format>', 'directory format: [{{family}}/{{name}}/{{version}}]')
+commander.on('--help', function () {
+    console.log();
+    console.log('  Examples:');
+    console.log();
+    console.log('   $ spm zip arale/class');
+    console.log('   $ spm zip arale/class@1.0.0');
+    console.log();
 });
-
 commander.parse(process.argv);
-
 // run install
 console.log();
-
 var options = {};
 options.source = commander.source;
 options.src = commander.input;
 options.dest = commander.output;
 options.basedir = commander.format;
 options.query = commander.args[0];
-
 var basedir = process.cwd();
-zip(options, function(err, bytesWrite, dest) {
-  dest = path.relative(basedir, dest);
-  console.log();
-  console.log('     write ' + bytesWrite + ' bytes into ' + dest);
-  console.log();
+zip(options, function (err, bytesWrite, dest) {
+    dest = path.relative(basedir, dest);
+    console.log();
+    console.log('     write ' + bytesWrite + ' bytes into ' + dest);
+    console.log();
 });

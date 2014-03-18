@@ -1,36 +1,31 @@
 #!/usr/bin/env node
-
 var exeq = require('exeq');
 var path = require('path');
 var output = '_site/coverage.html';
 var outputJSON = '_site/coverage.json';
 require('colorful').colorful();
-
 exeq([
-  'spm doc build',
-  'mocha-browser _site/tests/runner.html',
-  'mocha-browser _site/tests/runner.html?dist',
-  'rm -fr ' + path.join('_site', 'src-cov'),
-  'jscoverage --encoding=utf8 src _site/src-cov',
-  'mocha-browser _site/tests/runner.html?cov -R html-cov -o ' + outputJSON +' > ' + output,
-]).on('done', function() {
-  try{
-    var covJSON = require(path.resolve(outputJSON));
-
-    var percentage = Math.round(covJSON.coverage) + '%';
-    var sloc = covJSON.sloc.toString();
-    console.log('  ' + percentage.to.green + ' coverage, ' + sloc.to.green + ' sloc');
-
-    for (var i=0; i<covJSON.files.length; i++) {
-      var fileName = covJSON.files[i].filename;
-      var filePercentage = Math.round(covJSON.files[i].coverage)  + '%';
-      var fileSloc = covJSON.files[i].sloc.toString();
-      console.log('    ' + (fileName + ': ').to.grey + filePercentage.to.green + ' coverage, '.to.grey + fileSloc.to.green + ' sloc'.to.grey);
-    }
-
-    console.log('  You can see more detail in ' + output.to.cyan.color);
-  } catch(e) {
-    console.log('');
-    console.log(('fail to output ' + outputJSON).to.red.color);
-  }
-}).run();
+    'spm doc build',
+    'mocha-browser _site/tests/runner.html',
+    'mocha-browser _site/tests/runner.html?dist',
+    'rm -fr ' + path.join('_site', 'src-cov'),
+    'jscoverage --encoding=utf8 src _site/src-cov',
+    'mocha-browser _site/tests/runner.html?cov -R html-cov -o ' + outputJSON + ' > ' + output,
+]).on('done',function () {
+        try {
+            var covJSON = require(path.resolve(outputJSON));
+            var percentage = Math.round(covJSON.coverage) + '%';
+            var sloc = covJSON.sloc.toString();
+            console.log('  ' + percentage.to.green + ' coverage, ' + sloc.to.green + ' sloc');
+            for (var i = 0; i < covJSON.files.length; i++) {
+                var fileName = covJSON.files[i].filename;
+                var filePercentage = Math.round(covJSON.files[i].coverage) + '%';
+                var fileSloc = covJSON.files[i].sloc.toString();
+                console.log('    ' + (fileName + ': ').to.grey + filePercentage.to.green + ' coverage, '.to.grey + fileSloc.to.green + ' sloc'.to.grey);
+            }
+            console.log('  You can see more detail in ' + output.to.cyan.color);
+        } catch (e) {
+            console.log('');
+            console.log(('fail to output ' + outputJSON).to.red.color);
+        }
+    }).run();
