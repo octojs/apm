@@ -42,7 +42,7 @@ if (commander.upgrade) {
 /*
  fetch template if not exist
  */
-if (!exists(templates["platform"])) {
+if (!exists(template)) {
     helper.gitInstall('git@github.com:octojs/template-platform.git', template)
         .on('close', runTask);
 } else {
