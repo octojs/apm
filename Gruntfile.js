@@ -15,7 +15,7 @@ module.exports = function(grunt) {
           server: 'https://a.alipayobjects.com',
           onFailure: function() {
             grunt.log.error("Above files is existed online, this version is already published!");
-            grunt.file.delete('.build');
+//            grunt.file.delete('.build');
             process.exit(0);
           }
         },
@@ -50,7 +50,7 @@ module.exports = function(grunt) {
       dist: {
         options: {
           onFailure: function() {
-            grunt.file.delete('.build');
+//            grunt.file.delete('.build');
             process.exit(0);
           }
         },
@@ -219,7 +219,6 @@ module.exports = function(grunt) {
 
   var taskList = [
     'clean:build', // delete build direcotry first
-    'check-system',
 
     'spm-install', // install dependencies
 
@@ -245,7 +244,6 @@ module.exports = function(grunt) {
     'uglify:js',  // .build/tmp/*.js -> .build/dist/*.js
 
     'check-debug',
-    'check-online:alipay',
     'peaches',
 
     'clean:dist',
